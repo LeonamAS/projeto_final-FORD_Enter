@@ -1,13 +1,13 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" (click)="onHome()">
       <img src="" alt="logo">
     </a>
     <div class="menu">
-      <a href="">Galeria</a>
-      <a href="">Sobre</a>
-      <a href="">Contato</a>
-      <a href="">Iniciar Seção</a>
+      <a (click)="onGaleria()">Galeria</a>
+      <a (click)="onSobre()">Sobre</a>
+      <a (click)="onContato()">Contato</a>
+      <a (click)="onLogin()">Iniciar Seção</a>
     </div>
   </div>
 </nav>

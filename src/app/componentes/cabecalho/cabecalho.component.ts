@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
+import { Router } from '@angular/router';
 import { NgbCollapseModule, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -11,5 +12,24 @@ import { NgbCollapseModule, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap
   styleUrl: './cabecalho.component.css'
 })
 export class CabecalhoComponent {
+    constructor(private router: Router) { }
 
+  onLogin(): void {
+    this.router.navigate(['/login'])
+  }
+  onUserpage(): void {
+    this.router.navigate(['/userpage'])
+  }
+  onHome(): void {
+    this.router.navigate(['/home'])
+  }
+  onContato(): void{
+    this.router.navigate(['/contato'])
+  }
+  onGaleria(): void{
+    this.router.navigate(['/galeria'])
+  }
+  onSobre(): void{
+    this.router.navigate(['/sobre'])
+  }
 }
