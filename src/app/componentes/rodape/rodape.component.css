@@ -1,0 +1,12 @@
+.rodape {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3px;
+    color: white;
+    background-color: rgb(68, 148, 253);
+}
+
+.copyright p {
+    margin-bottom: 0;
+}

@@ -1,0 +1,7 @@
+.sobre {
+    display: flex;
+}
+
+.sobre img {
+    width: 30%;
+}

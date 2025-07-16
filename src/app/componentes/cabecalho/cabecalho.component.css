@@ -1,0 +1,8 @@
+.cabecalho {
+    background-color: rgb(68, 148, 253);
+    color: white;
+}
+
+.menu a {
+    padding: 0 10px;
+}

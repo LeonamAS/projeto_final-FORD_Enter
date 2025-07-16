@@ -6,7 +6,7 @@ import { RodapeComponent } from '../componentes/rodape/rodape.component';
   selector: 'app-contato',
   imports: [
     CabecalhoComponent,
-    RodapeComponent
+    RodapeComponent,
   ],
   templateUrl: './contato.component.html',
   styleUrl: './contato.component.css'
