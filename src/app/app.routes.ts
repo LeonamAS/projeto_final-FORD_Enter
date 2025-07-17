@@ -5,6 +5,7 @@ import { GaleriaComponent } from './galeria/galeria.component';
 import { ContatoComponent } from './contato/contato.component';
 import { LoginComponent } from './login/login.component';
 import { UserpageComponent } from './userpage/userpage.component';
+import { CadastroComponent } from './cadastro/cadastro.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -13,5 +14,6 @@ export const routes: Routes = [
     { path: 'galeria', component: GaleriaComponent },
     { path: 'contato', component: ContatoComponent },
     { path: 'login', component: LoginComponent },
-    { path: 'userpage', component: UserpageComponent }
+    { path: 'userpage', component: UserpageComponent },
+    { path: 'cadastro', component: CadastroComponent}
 ];

@@ -10,6 +10,10 @@
     background-size: cover;
 }
 
-.card {
-    padding: 15px;
+.card-login {
+    width: 400px;
+}
+
+.logo  {
+    width: 100px;
 }

@@ -5,4 +5,10 @@
 
 .menu a {
     padding: 0 10px;
+    font-size: larger;
+    font-weight: bold;
+}
+
+a img {
+    width:50px;
 }

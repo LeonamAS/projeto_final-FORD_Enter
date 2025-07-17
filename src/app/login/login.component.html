@@ -1,29 +1,58 @@
 <main>
     <app-cabecalho></app-cabecalho>
     <section class="login">
-        <div class="card" style="width: 40rem">
-            <form>
-                <div class="form-floating mb-3">
-                    <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" />
-                    <label for="floatingInput">Email address</label>
-                    <div id="emailHelp" class="form-text">
-                        We'll never share your email with anyone else.
+        <div class="card-login">
+            <div class="login-container d-flex align-items-center justify-content-center min-vh-100">
+                <div class="card login-card shadow-lg p-4 p-md-5">
+                    <div class="text-center mb-4">
+                        <img src="/img/logo.png" alt="logo" class="logo mb-2">
+                        <h2 class="titulo">Faça seu login</h2>
                     </div>
+
+                    <form (ngSubmit)="onLogin()" #loginForm="ngForm">
+                        <div class="mb-3">
+                            <label for="email" class="form-label visually-hidden">Email</label>
+                            <input type="email" class="form-control form-control-lg" id="email" placeholder="Email"
+                                name="email" [(ngModel)]="loginData.email" required email #emailField="ngModel"
+                                [ngClass]="{'is-invalid': emailField.invalid && (emailField.dirty || emailField.touched)}">
+                            <div *ngIf="emailField.invalid && (emailField.dirty || emailField.touched)"
+                                class="invalid-feedback">
+                                <div *ngIf="emailField.errors?.['required']">Digite seu Email.</div>
+                                <div *ngIf="emailField.errors?.['email']">Insira um Email válido.</div>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="password" class="form-label visually-hidden">Senha</label>
+                            <div class="input-group input-group-lg">
+                                <input [type]="showPassword ? 'text' : 'password'" class="form-control" id="password"
+                                    placeholder="Senha" name="password" [(ngModel)]="loginData.password" required
+                                    minlength="6" #passwordField="ngModel"
+                                    [ngClass]="{'is-invalid': passwordField.invalid && (passwordField.dirty || passwordField.touched)}">
+                                <button class="btn btn-outline-secondary" type="button"
+                                    (click)="togglePasswordVisibility()">
+                                    <i class="fas" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+                                </button>
+                                <div *ngIf="passwordField.invalid && (passwordField.dirty || passwordField.touched)"
+                                    class="invalid-feedback">
+                                    <div *ngIf="passwordField.errors?.['required']">Digite sua senha.</div>
+                                    <div *ngIf="passwordField.errors?.['minlength']">A senha deve ter no mínimo 6
+                                        dígitos.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-lg w-100 mb-3" [disabled]="loginForm.invalid">
+                            Entrar
+                        </button>
+                        <hr class="my-4">
+                        <p>Não possui login?</p>
+                        <button class="btn btn-outline-secondary btn-lg w-100 mb-3" (click)="onCadastro()">
+                            Cadastre-se
+                        </button>
+                    </form>
                 </div>
-                <div class="form-floating">
-                    <input type="password" class="form-control" id="floatingPassword" placeholder="Password" />
-                    <label for="floatingPassword">Password</label>
-                    <div id="passwordHelpBlock" class="form-text">
-                        Your password must be 8-20 characters long, contain letters and
-                        numbers.
-                    </div>
-                </div>
-                <div class="mb-3 form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
+            </div>
         </div>
     </section>
     <app-rodape></app-rodape>

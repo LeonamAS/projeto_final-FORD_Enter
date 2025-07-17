@@ -17,9 +17,6 @@ export class CabecalhoComponent {
   onLogin(): void {
     this.router.navigate(['/login'])
   }
-  onUserpage(): void {
-    this.router.navigate(['/userpage'])
-  }
   onHome(): void {
     this.router.navigate(['/home'])
   }
