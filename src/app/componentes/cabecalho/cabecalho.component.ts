@@ -29,4 +29,7 @@ export class CabecalhoComponent {
   onSobre(): void{
     this.router.navigate(['/sobre'])
   }
+  onCadastro(): void{
+    this.router.navigate(['/cadastro'])
+  }
 }

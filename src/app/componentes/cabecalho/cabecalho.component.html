@@ -1,5 +1,5 @@
 <section class="cabecalho">
-  <nav class="navbar navbar-expand-lg">
+  <!-- <nav class="navbar navbar-expand-lg">
     <div class="container-fluid itens">
       <a class="navbar-brand" (click)="onHome()">
         <img src="/img/logo.png" alt="logo">
@@ -13,5 +13,25 @@
         </a>
       </div>
     </div>
-  </nav>
+  </nav> -->
+  <div class="container">
+    <header
+      class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+      <div class="col-md-3 mb-2 mb-md-0">
+        <a (click)="onHome()" class="d-inline-flex link-body-emphasis text-decoration-none">
+          <img src="/img/logo.png" alt="logo">
+        </a>
+      </div>
+      <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+        <li><a (click)="onHome()" class="nav-link px-2 link-secondary">Home</a></li>
+        <li><a (click)="onGaleria()" class="nav-link px-2">Galeria</a></li>
+        <li><a (click)="onSobre()" class="nav-link px-2">Sobre</a></li>
+        <li><a (click)="onContato()" class="nav-link px-2">Contato</a></li>
+      </ul>
+      <div class="col-md-3 text-end"> 
+        <button type="button" (click)="onLogin()" class="btn btn-outline-primary me-2">Login</button> 
+        <button type="button" (click)="onCadastro()" class="btn btn-primary">Sign-up</button> 
+      </div>
+    </header>
+  </div>
 </section>

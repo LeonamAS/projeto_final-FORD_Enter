@@ -7,16 +7,20 @@
     justify-content: space-around;
     align-items: center;
     padding: 20px;
-    margin: 100px 0;
+    margin: 5% 0;
 }
 
 .layout img {
     width: 200px;
     height: 200px;
+    display: flex;
+    align-self: self-start;
+    margin-top: 10px;
+    margin-left: 10px;
 }
 
 .texto {
-    padding: 20px;
+    padding: 0 20px;
     width: 50%;
 }
 
