@@ -1,11 +1,83 @@
 
-.cadastro {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background-image: url(/img/sunset.jpg);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+.signup-container {
+  background-image: url('/img/beach.jpg'); 
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.signup-card {
+  width: 400px;
+  border-radius: 15px;
+  background-color: rgba(255, 255, 255, 0.95);
+}
+
+.logo  {
+    width: 100px;
+}
+
+.pixiv-logo-text {
+  font-family: 'Arial Black', sans-serif;
+  font-size: 2.5rem;
+  color: #0096fa; /* Cor azul do Pixiv */
+  letter-spacing: -1px;
+}
+
+.form-control-lg {
+  border-radius: 8px;
+}
+
+.btn-primary {
+  background-color: #0096fa; /* Cor azul do Pixiv */
+  border-color: #0096fa;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.btn-primary:hover {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+a.text-decoration-none {
+  color: #0096fa; /* Cor azul para links */
+}
+
+a.text-decoration-none:hover {
+  text-decoration: underline !important;
+}
+
+/* Estilos para o placeholder do reCAPTCHA */
+.recaptcha-placeholder {
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  padding: 10px;
+}
+
+.recaptcha-logo {
+  width: 30px; /* Ajuste o tamanho do logo do reCAPTCHA conforme necessário */
+  height: auto;
+  margin-left: auto; /* Alinha à direita */
+}
+
+.form-check-input {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px; /* Ajuste para tornar o checkbox mais quadrado como na imagem */
+  flex-shrink: 0; /* Impede que o input encolha */
+}
+
+/* Ajustes para o texto do reCAPTCHA */
+.recaptcha-placeholder .small a {
+  font-size: 0.75rem; /* Menor fonte para links de privacidade/termos do reCAPTCHA */
+}
+
+/* Estilo para simular o campo amarelado da imagem (opcional, pode ser usado para campos preenchidos) */
+input[name="email"][value]:not([value=""]) {
+  background-color: #fffacd; /* Cor amarelo claro */
 }

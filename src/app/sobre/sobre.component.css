@@ -1,7 +1,36 @@
 .sobre {
-    display: flex;
+    min-height: 100vh;
 }
 
-.sobre img {
-    width: 30%;
+.layout {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px;
+    margin-top: 100px;
+}
+
+.layout img {
+    width: 200px;
+    height: 200px;
+}
+
+.texto {
+    padding: 20px;
+    width: 50%;
+}
+
+.follow {
+    font-weight: bold;
+    font-size: large;
+}
+
+.texto a{
+    padding: 10px;
+    font-weight: bold;
+}
+
+.imagens img {
+    margin-top: 50px;
+    width: 25%;
 }

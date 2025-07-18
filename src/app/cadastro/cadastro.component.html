@@ -1,24 +1,68 @@
 <main>
     <app-cabecalho></app-cabecalho>
     <section class="cadastro">
-        <div class="login-container d-flex align-items-center justify-content-center min-vh-100">
-            <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Nome" />
-            </div>
+        <div class="signup-container d-flex align-items-center justify-content-center min-vh-100">
+            <div class="card signup-card shadow-lg p-4 p-md-5">
+                <div class="text-center mb-4">
+                    <img src="/img/logo.png" alt="logo" class="logo mb-2">
+                    <h2 class="titulo">Crie sua conta</h2>
+                </div>
 
-            <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Email" />
-            </div>
+                <form (ngSubmit)="onCreateAccount()" #signupForm="ngForm">
+                    <div class="mb-3">
+                        <label for="email" class="form-label visually-hidden">Endereço de email</label>
+                        <input type="email" class="form-control form-control-lg" id="email" placeholder="Endereço de email"
+                            name="email" [(ngModel)]="signupData.email" required email #emailField="ngModel"
+                            [ngClass]="{'is-invalid': emailField.invalid && (emailField.dirty || emailField.touched)}">
+                        <div *ngIf="emailField.invalid && (emailField.dirty || emailField.touched)"
+                            class="invalid-feedback">
+                            <div *ngIf="emailField.errors?.['required']">É necessário inserir um email.</div>
+                            <div *ngIf="emailField.errors?.['email']">Insira um email válido.</div>
+                        </div>
+                    </div>
 
-            <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Telefone" />
+                    <div class="mb-4">
+                        <div
+                            class="recaptcha-placeholder bg-light p-3 border rounded d-flex align-items-center justify-content-between">
+                            <label class="form-check-label d-flex align-items-center mb-0" for="recaptchaCheck">
+                                <input class="form-check-input me-2" type="checkbox" id="recaptchaCheck"
+                                    [(ngModel)]="isRobotChecked" name="recaptcha" required>
+                                I'm not a robot
+                            </label>
+                            <div class="text-end">
+                                <img src="https://www.gstatic.com/recaptcha/api2/logo_48.png" alt="reCAPTCHA logo"
+                                    class="recaptcha-logo">
+                                <div class="small text-muted">
+                                    <a href="https://www.google.com/recaptcha/about/" target="_blank"
+                                        class="text-decoration-none">reCAPTCHA</a>
+                                    <br>
+                                    <a href="https://policies.google.com/privacy" target="_blank"
+                                        class="text-decoration-none">Privacy</a>
+                                    - <a href="https://policies.google.com/terms" target="_blank"
+                                        class="text-decoration-none">Terms</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="signupForm.submitted && !isRobotChecked" class="invalid-feedback d-block">
+                            Please confirm you are not a robot.
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-lg w-100 mb-3"
+                        [disabled]="signupForm.invalid || !isRobotChecked">
+                        Next
+                    </button>
+
+                    <p class="text-center text-muted small mt-4">
+                        Esse site é  protegido por reCAPTCHA Enterprise e a
+                        <a href="https://policies.google.com/privacy" target="_blank"
+                            class="text-decoration-none">Politica de Privacidade</a>
+                        e
+                        <a href="https://policies.google.com/terms" target="_blank" class="text-decoration-none">Termos de serviço</a>
+                        da Google se aplicam.
+                    </p>
+                </form>
             </div>
-            <select class="form-select" aria-label="Default select example">
-                <option selected>Open this select menu</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-            </select>
         </div>
     </section>
     <app-rodape></app-rodape>

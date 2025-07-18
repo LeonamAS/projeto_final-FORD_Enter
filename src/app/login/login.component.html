@@ -31,7 +31,8 @@
                                     [ngClass]="{'is-invalid': passwordField.invalid && (passwordField.dirty || passwordField.touched)}">
                                 <button class="btn btn-outline-secondary" type="button"
                                     (click)="togglePasswordVisibility()">
-                                    <i class="fas" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+                                    <mat-icon>{{ showPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+                                 
                                 </button>
                                 <div *ngIf="passwordField.invalid && (passwordField.dirty || passwordField.touched)"
                                     class="invalid-feedback">
