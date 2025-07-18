@@ -19,10 +19,10 @@ declare var bootstrap: any;
 })
 export class GaleriaComponent {
   images = [
-    { src: '/img/200.jpg', alt: '200', title: '200' },
-    { src: '/img/acorn.jpg', alt: 'acorn', title: 'acorn' },
-    { src: '/img/bathroon.jpg', alt: 'bathroon', title: 'bathroon' },
-    { src: '/img/beach.jpg', alt: 'beach', title: 'beach' },
+    { src: '/img/200.jpg', alt: '200 folowers', title: '200' },
+    { src: '/img/acorn.jpg', alt: 'Quercus infectoria', title: 'Bolota' },
+    { src: '/img/bathroon.jpg', alt: 'Perspectiva', title: 'Pia' },
+    { src: '/img/beach.jpg', alt: 'Lápis de cor', title: 'Pôr-do-Sol' },
     { src: '/img/cat.jpg', alt: 'cat', title: 'cat' },
     { src: '/img/city.jpg', alt: 'city', title: 'city' },
     { src: '/img/tv.jpg', alt: 'tv', title: 'tv' },
