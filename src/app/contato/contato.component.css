@@ -1,3 +1,26 @@
 .contato {
-    min-height: 100vh;
+    margin: 0 10%;
+    background-image: url(/img/sunset.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* .texto p {
+
+} */
+
+.contato a:hover {
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 600px) {
+    .contato {
+        margin: 0 10px;
+    }
+
+    /* .texto p {
+       
+    } */
+
 }
