@@ -8,11 +8,12 @@
                     <h2 class="titulo">Crie sua conta</h2>
                 </div>
 
-                <form (ngSubmit)="onCreateAccount()" #signupForm="ngForm">
+                <form (ngSubmit)="onCreateAccount()" #signupForm="ngForm" *ngIf="!showRegistrationForm">
                     <div class="mb-3">
                         <label for="email" class="form-label visually-hidden">Endereço de email</label>
-                        <input type="email" class="form-control form-control-lg" id="email" placeholder="Endereço de email"
-                            name="email" [(ngModel)]="signupData.email" required email #emailField="ngModel"
+                        <input type="email" class="form-control form-control-lg" id="email"
+                            placeholder="Endereço de email" name="email" [(ngModel)]="signupData.email" required email
+                            #emailField="ngModel"
                             [ngClass]="{'is-invalid': emailField.invalid && (emailField.dirty || emailField.touched)}">
                         <div *ngIf="emailField.invalid && (emailField.dirty || emailField.touched)"
                             class="invalid-feedback">
@@ -27,7 +28,7 @@
                             <label class="form-check-label d-flex align-items-center mb-0" for="recaptchaCheck">
                                 <input class="form-check-input me-2" type="checkbox" id="recaptchaCheck"
                                     [(ngModel)]="isRobotChecked" name="recaptcha" required>
-                                I'm not a robot
+                                Não sou um robô
                             </label>
                             <div class="text-end">
                                 <img src="https://www.gstatic.com/recaptcha/api2/logo_48.png" alt="reCAPTCHA logo"
@@ -44,23 +45,88 @@
                             </div>
                         </div>
                         <div *ngIf="signupForm.submitted && !isRobotChecked" class="invalid-feedback d-block">
-                            Please confirm you are not a robot.
+                            Por favor confirme que não é um robô
                         </div>
                     </div>
 
                     <button type="submit" class="btn btn-primary btn-lg w-100 mb-3"
                         [disabled]="signupForm.invalid || !isRobotChecked">
-                        Next
+                        Avançar
                     </button>
 
                     <p class="text-center text-muted small mt-4">
-                        Esse site é  protegido por reCAPTCHA Enterprise e a
+                        Esse site é protegido por reCAPTCHA Enterprise e a
                         <a href="https://policies.google.com/privacy" target="_blank"
                             class="text-decoration-none">Politica de Privacidade</a>
                         e
-                        <a href="https://policies.google.com/terms" target="_blank" class="text-decoration-none">Termos de serviço</a>
+                        <a href="https://policies.google.com/terms" target="_blank" class="text-decoration-none">Termos
+                            de serviço</a>
                         da Google se aplicam.
                     </p>
+                </form>
+
+                <form (ngSubmit)="onRegisterUser()" #registerForm="ngForm" *ngIf="showRegistrationForm">
+                    <div class="mb-3">
+                        <label for="regEmail" class="form-label visually-hidden">Endereço de email</label>
+                        <input type="email" class="form-control form-control-lg" id="regEmail"
+                            placeholder="Endereço de email" name="email" [(ngModel)]="signupData.email" required email
+                            readonly>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="password" class="form-label visually-hidden">Senha</label>
+                        <div class="input-group">
+                            <input [type]="showPassword ? 'text' : 'password'" class="form-control form-control-lg"
+                                id="password" placeholder="Senha" name="password" [(ngModel)]="signupData.password"
+                                required minlength="6" #passwordField="ngModel"
+                                [ngClass]="{'is-invalid': passwordField.invalid && (passwordField.dirty || passwordField.touched)}">
+                            <button class="btn btn-outline-secondary" type="button"
+                                (click)="togglePasswordVisibility()">
+                                <i class="material-icons">{{ showPassword ? 'visibility_off' : 'visibility' }}</i>
+                            </button>
+                            <div *ngIf="passwordField.invalid && (passwordField.dirty || passwordField.touched)"
+                                class="invalid-feedback d-block">
+                                <div *ngIf="passwordField.errors?.['required']">É necessário inserir uma senha.</div>
+                                <div *ngIf="passwordField.errors?.['minlength']">A senha deve ter pelo menos 6
+                                    caracteres.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="confirmPassword" class="form-label visually-hidden">Confirmar Senha</label>
+                        <div class="input-group">
+                            <input [type]="showPassword ? 'text' : 'password'" class="form-control form-control-lg"
+                                id="confirmPassword" placeholder="Confirmar Senha" name="confirmPassword"
+                                [(ngModel)]="signupData.confirmPassword" required
+                                [ngClass]="{'is-invalid': signupData.password !== signupData.confirmPassword && signupData.confirmPassword.length > 0}">
+                            <button class="btn btn-outline-secondary" type="button"
+                                (click)="togglePasswordVisibility()">
+                                <i class="material-icons">{{ showPassword ? 'visibility_off' : 'visibility' }}</i>
+                            </button>
+                            <div *ngIf="signupData.password !== signupData.confirmPassword && signupData.confirmPassword.length > 0"
+                                class="invalid-feedback">
+                                As senhas não coincidem.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4 form-check">
+                        <input type="checkbox" class="form-check-input" id="consentCheck" name="consent"
+                            [(ngModel)]="consentChecked" required>
+                        <label class="form-check-label" for="consentCheck">
+                            Ao clicar em cadastrar você concorda com a <a (click)="onPrivacidade()"
+                                target="_blank" class="text-decoration-none">política de privacidade</a>.
+                        </label>
+                        <div *ngIf="registerForm.submitted && !consentChecked" class="invalid-feedback d-block">
+                            Você deve concordar com a política de privacidade para se cadastrar.
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-success btn-lg w-100 mb-3"
+                        [disabled]="registerForm.invalid || signupData.password !== signupData.confirmPassword || !consentChecked">
+                        Cadastrar
+                    </button>
                 </form>
             </div>
         </div>

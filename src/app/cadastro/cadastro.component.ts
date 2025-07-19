@@ -3,49 +3,62 @@ import { CabecalhoComponent } from '../componentes/cabecalho/cabecalho.component
 import { RodapeComponent } from '../componentes/rodape/rodape.component';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-cadastro',
-  imports: [ 
+  imports: [
     CabecalhoComponent,
     RodapeComponent,
     FormsModule,
-    CommonModule
+    CommonModule,
+    MatIconModule
   ],
   templateUrl: './cadastro.component.html',
   styleUrl: './cadastro.component.css'
 })
-export class CadastroComponent implements OnInit{
-    signupData = {
-    email: ''
+export class CadastroComponent implements OnInit {
+  signupData = {
+    email: '',
+    password: '',
+    confirmPassword: ''
   };
-  isRobotChecked: boolean = false;
 
-  constructor() { }
+  isRobotChecked: boolean = false;
+  showRegistrationForm: boolean = false;
+  consentChecked: boolean = false;
+  showPassword = false;
+
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
 
-  onCreateAccount(): void {
-    // Esta função seria chamada ao submeter o formulário de cadastro.
-    // Aqui você integraria a lógica para enviar o email para seu backend,
-    // que então poderia enviar um email de verificação, etc.
+  onPrivacidade(): void {
+    this.router.navigate(['/privacidade'])
+  }
 
+  onCreateAccount(): void {
     if (this.signupData.email && this.isRobotChecked) {
       console.log('Tentativa de criar conta com:', this.signupData.email);
-      // Exemplo de onde você chamaria um serviço de cadastro:
-      // this.authService.register(this.signupData.email).subscribe(
-      //   response => {
-      //     console.log('Cadastro iniciado com sucesso!', response);
-      //     // Redirecionar para uma página de "Verifique seu email"
-      //   },
-      //   error => {
-      //     console.error('Erro no cadastro:', error);
-      //     // Exibir mensagem de erro para o usuário
-      //   }
-      // );
+      this.showRegistrationForm = true;
     } else {
       console.warn('Formulário inválido. Preencha o email e confirme o reCAPTCHA.');
     }
+  }
+
+  onRegisterUser(): void {
+    if (this.signupData.password === this.signupData.confirmPassword && this.consentChecked) {
+      this.router.navigate(['/userpage']);
+    } else if (this.signupData.password !== this.signupData.confirmPassword) {
+      console.warn('As senhas não coincidem.');
+    } else if (!this.consentChecked) {
+      console.warn('É necessário aceitar a política de privacidade.');
+    }
+  }
+
+  togglePasswordVisibility(): void {
+    this.showPassword = !this.showPassword;
   }
 }
