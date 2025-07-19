@@ -1,0 +1,206 @@
+<main>
+  <app-cabecalho></app-cabecalho>
+  <section class="privacidade">
+    <div class="container-fluid py-5">
+      <div class="row">
+        <div class="col-lg-3 col-md-4 col-12 mb-4 mb-md-0">
+          <nav id="sidebar" class="sticky-top" style="top: 20px;">
+            <h5 class="mb-3">Tópicos</h5>
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <a class="nav-link text-dark" [routerLink]="['.']" fragment="introducao"
+                  [class.active]="activeSection === 'introducao'">1. Introdução</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-dark" [routerLink]="['.']" fragment="coleta-dados"
+                  [class.active]="activeSection === 'coleta-dados'">2. Coleta de Dados</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-dark" [routerLink]="['.']" fragment="uso-dados"
+                  [class.active]="activeSection === 'uso-dados'">3. Uso dos Dados Coletados</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-dark" [routerLink]="['.']" fragment="compartilhamento-dados"
+                  [class.active]="activeSection === 'compartilhamento-dados'">4. Compartilhamento de Dados</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-dark" [routerLink]="['.']" fragment="seguranca-dados"
+                  [class.active]="activeSection === 'seguranca-dados'">5. Segurança dos Dados</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-dark" [routerLink]="['.']" fragment="seus-direitos"
+                  [class.active]="activeSection === 'seus-direitos'">6. Seus Direitos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-dark" [routerLink]="['.']" fragment="links-terceiros"
+                  [class.active]="activeSection === 'links-terceiros'">7. Links para Terceiros</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-dark" [routerLink]="['.']" fragment="privacidade-criancas"
+                  [class.active]="activeSection === 'privacidade-criancas'">8. Privacidade de Crianças</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-dark" [routerLink]="['.']" fragment="alteracoes-politica"
+                  [class.active]="activeSection === 'alteracoes-politica'">9. Alterações nesta Política</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-dark" [routerLink]="['.']" fragment="contato"
+                  [class.active]="activeSection === 'contato'">10. Contato</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+
+        <div class="col-lg-9 col-md-8 col-12">
+          <h1 class="mb-4">Política de Privacidade</h1>
+          <p class="text-muted mb-5">Última atualização: 19 de julho de 2025</p>
+
+          <section id="introducao" class="mb-5">
+            <h2>1. Introdução</h2>
+            <p>Esta Política de Privacidade descreve como Kurogane Design, doravante denominado "eu" ou "nós", coleta,
+              usa e protege as informações pessoais que você nos fornece ao visitar e usar meu site kurogane.com.br e ao
+              solicitar comissões de arte.</p>
+            <p>Sua privacidade é muito importante para mim, e estou comprometido em proteger suas informações pessoais.
+              Ao utilizar este site e meus serviços, você concorda com a coleta e o uso de informações de acordo com
+              esta política.</p>
+          </section>
+
+          <section id="coleta-dados" class="mb-5">
+            <h2>2. Informações que Coletamos</h2>
+            <p>Coletamos diferentes tipos de informações para várias finalidades, a fim de fornecer e melhorar meus
+              serviços para você.</p>
+
+            <h3 class="mt-4">2.1. Dados Pessoais</h3>
+            <p>Ao solicitar uma comissão ou entrar em contato comigo através do site, posso solicitar que você me
+              forneça certas informações de identificação pessoal que podem ser usadas para contatá-lo ou identificá-lo.
+              As informações de identificação pessoal podem incluir, mas não se limitam a:</p>
+            <ul>
+              <li><strong>Nome completo</strong></li>
+              <li><strong>Endereço de e-mail</strong></li>
+              <li><strong>Número de telefone (opcional)</strong></li>
+              <li><strong>Informações de pagamento</strong> (processadas por terceiros, como plataformas de pagamento;
+                nós não armazenamos detalhes completos do seu cartão de crédito)</li>
+              <li><strong>Endereço de correspondência</strong> (para envio de artes físicas)</li>
+              <li><strong>Detalhes da comissão:</strong> Informações e referências que você fornece sobre o trabalho de
+                arte que deseja.</li>
+            </ul>
+
+            <h3 class="mt-4">2.2. Dados de Uso</h3>
+            <p>Também posso coletar informações sobre como o site é acessado e usado ("Dados de Uso"). Esses Dados de
+              Uso podem incluir informações como o endereço IP do seu computador, tipo de navegador, versão do
+              navegador, as páginas do meu site que você visita, a hora e a data da sua visita, o tempo gasto nessas
+              páginas, identificadores exclusivos de dispositivos e outros dados de diagnóstico.</p>
+          </section>
+
+          <section id="uso-dados" class="mb-5">
+            <h2>3. Como Usamos Suas Informações</h2>
+            <p>As informações coletadas são usadas para diversas finalidades:</p>
+            <ul>
+              <li>Para <strong>fornecer e manter o serviço</strong> de comissões de arte.</li>
+              <li>Para <strong>processar suas solicitações de comissão</strong> e pagamentos.</li>
+              <li>Para <strong>contatá-lo</strong> sobre sua comissão, atualizações ou para responder às suas perguntas.
+              </li>
+              <li>Para <strong>enviar e entregar</strong> as artes físicas, se aplicável.</li>
+              <li>Para <strong>melhorar e personalizar</strong> sua experiência no site.</li>
+              <li>Para <strong>monitorar o uso</strong> do site e analisar tendências para melhorar a funcionalidade.
+              </li>
+              <li>Para <strong>detectar, prevenir e resolver problemas técnicos</strong>.</li>
+              <li>Para <strong>cumprir obrigações legais</strong>.</li>
+            </ul>
+          </section>
+
+          <section id="compartilhamento-dados" class="mb-5">
+            <h2>4. Compartilhamento de Suas Informações</h2>
+            <p>Sua privacidade é primordial. Eu não vendo, troco ou alugo suas informações de identificação pessoal para
+              terceiros. Posso compartilhar suas informações nas seguintes situações:</p>
+            <ul>
+              <li><strong>Com prestadores de serviços:</strong> Posso empregar empresas e indivíduos terceirizados para
+                facilitar meu serviço, prestar o serviço em meu nome, executar serviços relacionados ao site (como
+                processamento de pagamentos, análise de dados, hospedagem) ou me auxiliar na análise de como meu serviço
+                é usado. Esses terceiros têm acesso aos seus Dados Pessoais apenas para realizar essas tarefas em meu
+                nome e são obrigados a não divulgá-los ou usá-los para qualquer outra finalidade.</li>
+              <li><strong>Para cumprimento legal:</strong> Posso divulgar seus Dados Pessoais de boa fé, quando tal ação
+                for necessária para:
+                <ul>
+                  <li>Cumprir uma obrigação legal.</li>
+                  <li>Proteger e defender meus direitos ou propriedade.</li>
+                  <li>Prevenir ou investigar possíveis irregularidades relacionadas ao serviço.</li>
+                  <li>Proteger a segurança pessoal dos usuários do serviço ou do público.</li>
+                  <li>Proteger-me contra responsabilidade legal.</li>
+                </ul>
+              </li>
+            </ul>
+          </section>
+
+          <section id="seguranca-dados" class="mb-5">
+            <h2>5. Segurança dos Dados</h2>
+            <p>A segurança dos seus dados é importante para mim, mas lembre-se que nenhum método de transmissão pela
+              Internet ou método de armazenamento eletrônico é 100% seguro. Embora eu me esforce para usar meios
+              comercialmente aceitáveis para proteger seus Dados Pessoais, não posso garantir sua segurança absoluta.
+            </p>
+          </section>
+
+          <section id="seus-direitos" class="mb-5">
+            <h2>6. Seus Direitos</h2>
+            <p>De acordo com a Lei Geral de Proteção de Dados Pessoais (LGPD), você tem direitos sobre suas informações
+              pessoais, incluindo:</p>
+            <ul>
+              <li><strong>Direito de confirmação e acesso:</strong> Você pode solicitar a confirmação da existência do
+                tratamento de seus dados e acesso a eles.</li>
+              <li><strong>Direito de correção:</strong> Você pode solicitar a correção de dados incompletos, inexatos ou
+                desatualizados.</li>
+              <li><strong>Direito de exclusão (anonimização, bloqueio ou eliminação):</strong> Você pode solicitar a
+                anonimização, bloqueio ou eliminação de dados desnecessários, excessivos ou tratados em desconformidade
+                com a LGPD.</li>
+              <li><strong>Direito à portabilidade:</strong> Você pode solicitar a portabilidade dos seus dados a outro
+                fornecedor de serviço ou produto.</li>
+              <li><strong>Direito de oposição:</strong> Você pode se opor ao tratamento de seus dados pessoais em
+                determinadas circunstâncias.</li>
+              <li><strong>Direito de revogar o consentimento:</strong> Você pode revogar seu consentimento a qualquer
+                momento para o tratamento de dados pessoais que dependa de consentimento.</li>
+            </ul>
+            <p>Para exercer qualquer um desses direitos, entre em contato comigo através dos canais informados nesta
+              Política de Privacidade.</p>
+          </section>
+
+          <section id="links-terceiros" class="mb-5">
+            <h2>7. Links para Outros Sites</h2>
+            <p>Meu site pode conter links para outros sites que não são operados por mim. Se você clicar em um link de
+              terceiros, será direcionado ao site desse terceiro. Aconselho fortemente que você revise a Política de
+              Privacidade de cada site que visitar.</p>
+            <p>Não tenho controle e não assumo responsabilidade pelo conteúdo, políticas de privacidade ou práticas de
+              quaisquer sites ou serviços de terceiros.</p>
+          </section>
+
+          <section id="privacidade-criancas" class="mb-5">
+            <h2>8. Privacidade de Crianças</h2>
+            <p>Meu serviço não se destina a menores de 18 anos ("Crianças").</p>
+            <p>Não coleto intencionalmente informações de identificação pessoal de menores de 18 anos. Se você é pai ou
+              responsável e sabe que seu filho me forneceu Dados Pessoais, entre em contato comigo. Se eu tomar
+              conhecimento de que coletei Dados Pessoais de crianças sem verificação de consentimento dos pais, tomarei
+              medidas para remover essas informações dos meus servidores.</p>
+          </section>
+
+          <section id="alteracoes-politica" class="mb-5">
+            <h2>9. Alterações a Esta Política de Privacidade</h2>
+            <p>Posso atualizar minha Política de Privacidade periodicamente. Notificarei você sobre quaisquer alterações
+              publicando a nova Política de Privacidade nesta página.</p>
+            <p>Aconselho que você revise esta Política de Privacidade periodicamente para quaisquer alterações. As
+              alterações a esta Política de Privacidade são efetivas quando publicadas nesta página.</p>
+          </section>
+
+          <section id="contato" class="mb-5">
+            <h2>10. Contato</h2>
+            <p>Se você tiver alguma dúvida sobre esta Política de Privacidade, entre em contato comigo:</p>
+            <ul>
+              <li><strong>Por e-mail:</strong> kurogane&#64;email.com </li>
+              <li><strong>Através do formulário de contato no meu site:</strong> kurogane.com.br/contato </li>
+            </ul>
+          </section>
+
+        </div>
+      </div>
+    </div>
+  </section>
+  <app-rodape></app-rodape>
+</main>

@@ -7,3 +7,19 @@
     background-color: aliceblue;
     font-weight: bold;
 }
+
+.rodape a:hover {
+    cursor: pointer;
+    animation-name: animacao;
+    animation-duration: 6s;
+}
+
+@keyframes animacao {
+    from {
+        background-color: white;
+    }
+
+    to {
+        background-color: aliceblue;
+    }
+}

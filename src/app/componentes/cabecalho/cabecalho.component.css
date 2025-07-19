@@ -4,11 +4,31 @@
 }
 
 .menu a {
-    padding: 0 10px;
+    padding: 10px;
     font-size: large;
     font-weight: bold;
 }
 
 a img {
     width: 50px;
+}
+
+.cabecalho a:hover {
+    cursor: pointer;
+
+}
+
+.menu a:hover {
+    animation-name: animacao;
+    animation-duration: 6s;
+}
+
+@keyframes animacao {
+    from {
+        background-color: white;
+    }
+
+    to {
+        background-color: aliceblue;
+    }
 }
