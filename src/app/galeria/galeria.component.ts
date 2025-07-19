@@ -19,20 +19,25 @@ declare var bootstrap: any;
 })
 export class GaleriaComponent {
   images = [
-    { src: '/img/200.jpg', alt: '200 folowers', title: '200' },
-    { src: '/img/acorn.jpg', alt: 'Quercus infectoria', title: 'Bolota' },
+    { src: '/img/200.jpg', alt: 'Lettering - Graffiti', title: '200' },
+    { src: '/img/acorn.jpg', alt: 'Natureza-morta', title: 'Bolota' },
     { src: '/img/bathroon.jpg', alt: 'Perspectiva', title: 'Pia' },
-    { src: '/img/beach.jpg', alt: 'Ilha de Maré', title: 'Pôr-do-Sol' },
-    { src: '/img/cat.jpg', alt: 'cat', title: 'cat' },
-    { src: '/img/city.jpg', alt: 'Modelo 1983', title: 'Honda City Turbo II' },
-    { src: '/img/tv.jpg', alt: 'tv', title: 'tv' },
-    { src: '/img/jimny.jpg', alt: 'Modelo JB23', title: 'Suzuki Jimny' },
-    { src: '/img/joGANdo.jpg', alt: 'Estilo Graffiti', title: 'Canal JoGANdo' },
+    { src: '/img/beach.jpg', alt: 'Lápis de cor', title: 'Pôr-do-Sol' },
+    { src: '/img/cat.jpg', alt: 'Desenho manual', title: 'Gato' },
+    { src: '/img/city.jpg', alt: 'Desenho manual', title: 'Honda City Turbo II' },
+    { src: '/img/tv.jpg', alt: 'Lettering - Graffiti', title: 'TV' },
+    { src: '/img/jimny.jpg', alt: 'Desenho manual', title: 'Suzuki Jimny' },
+    { src: '/img/joGANdo.jpg', alt: 'Lettering - Graffiti', title: 'Canal JoGANdo' },
     { src: '/img/kitchen.jpg', alt: 'Perspectiva', title: 'Cozinha' },
-    { src: '/img/sunset.jpg', alt: 'Bahia de Todos os Santos', title: 'Pôr-do-Sol' },
-    { src: '/img/wolf.jpg', alt: 'lobo', title: 'Lobo' },
+    { src: '/img/sunset.jpg', alt: 'Lápis de cor', title: 'Pôr-do-Sol' },
+    { src: '/img/wolf.jpg', alt: 'Caneta Esferográfica', title: 'Lobo' },
     { src: '/img/wreckage.jpg', alt: 'Mão Livre', title: 'Destroços' },
-    { src: '/img/zamtrios.jpg', alt: 'Monster Hunter', title: 'Zamtrios' },
+    { src: '/img/zamtrios.jpg', alt: 'Lápis de cor', title: 'Zamtrios' },
+    { src: '/img/japan.jpg', alt: 'Lettering - Graffiti', title: 'Japan' },
+    { src: '/img/lightpole.jpg', alt: 'Desenho manual', title: 'Urbano' },
+    { src: '/img/lune.jpg', alt: 'Lettering - Graffiti', title: 'Lune' },
+    { src: '/img/paint.jpg', alt: 'Lettering - Graffiti', title: 'Paint' },
+    { src: '/img/warehouse.jpg', alt: 'Desenho manual', title: 'Depósito' },
   ];
 
   selectedImage: any = null;
@@ -40,18 +45,12 @@ export class GaleriaComponent {
   private modalInstance: any;
 
   ngOnInit(): void {
-    // Inicializa o modal do Bootstrap após o carregamento do componente
     const modalElement = document.getElementById('imageModal');
     if (modalElement) {
       this.modalInstance = new bootstrap.Modal(modalElement);
     }
   }
 
-  /**
-   * Abre o modal com a imagem selecionada.
-   * @param image O objeto de imagem a ser exibido.
-   * @param index O índice da imagem no array.
-   */
   openImageModal(image: any, index: number): void {
     this.selectedImage = image;
     this.selectedIndex = index;
@@ -60,9 +59,6 @@ export class GaleriaComponent {
     }
   }
 
-  /**
-   * Fecha o modal e redefine a imagem selecionada.
-   */
   closeImageModal(): void {
     if (this.modalInstance) {
       this.modalInstance.hide();
@@ -71,29 +67,21 @@ export class GaleriaComponent {
     this.selectedIndex = -1;
   }
 
-  /**
-   * Navega para a imagem anterior no modal.
-   */
   previousImage(): void {
     if (this.selectedIndex > 0) {
       this.selectedIndex--;
       this.selectedImage = this.images[this.selectedIndex];
     } else {
-      // Opcional: Voltar para a última imagem se estiver na primeira
       this.selectedIndex = this.images.length - 1;
       this.selectedImage = this.images[this.selectedIndex];
     }
   }
 
-  /**
-   * Navega para a próxima imagem no modal.
-   */
   nextImage(): void {
     if (this.selectedIndex < this.images.length - 1) {
       this.selectedIndex++;
       this.selectedImage = this.images[this.selectedIndex];
     } else {
-      // Opcional: Ir para a primeira imagem se estiver na última
       this.selectedIndex = 0;
       this.selectedImage = this.images[this.selectedIndex];
     }

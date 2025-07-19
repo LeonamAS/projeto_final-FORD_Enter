@@ -28,6 +28,7 @@ export class LoginComponent {
   showPassword = false;
 
   constructor(private auth: AuthService, private router: Router) { }
+  
   ngOnInit(): void {
   }
 

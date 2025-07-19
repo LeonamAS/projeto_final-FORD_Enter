@@ -1,23 +1,25 @@
-/* Estilos para as miniaturas da galeria */
+.titulo {
+  font-weight: bold;
+}
+
 .gallery-thumbnail {
   cursor: pointer;
   transition: transform 0.2s ease-in-out, filter 0.2s ease-in-out;
-  object-fit: cover; /* Garante que a imagem preencha o espaço sem distorcer */
-  height: 220px; /* Altura fixa para as miniaturas */
-  width: 100%; /* Largura total da coluna */
-  border-radius: 8px 8px 0 0; /* Bordas arredondadas apenas no topo do card */
+  object-fit: cover; 
+  height: 220px;
+  width: 100%; 
+  border-radius: 8px 8px 0 0;
 }
 
 .gallery-thumbnail:hover {
   transform: scale(1.03);
-  filter: brightness(0.9); /* Escurece um pouco a imagem ao passar o mouse */
+  filter: brightness(0.9);
 }
 
-/* Estilos para os cards individuais da galeria */
 .gallery-card {
-  border-radius: 8px; /* Bordas arredondadas para o card inteiro */
-  overflow: hidden; /* Garante que as imagens com border-radius não estourem */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08) !important; /* Sombra mais suave */
+  border-radius: 8px; 
+  overflow: hidden; 
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08) !important; 
 }
 
 .gallery-card .card-body {
@@ -33,21 +35,18 @@
   font-size: 0.85rem;
 }
 
-/* Estilos para a imagem dentro do modal */
 .modal-image {
-  max-height: 85vh; /* Limita a altura da imagem no modal para não exceder a tela */
-  width: auto; /* Permite que a largura se ajuste automaticamente */
-  object-fit: contain; /* Garante que a imagem se ajuste ao espaço sem cortar */
-  padding: 10px; /* Pequeno padding para não colar nas bordas do modal */
+  max-height: 85vh; 
+  width: auto;
+  object-fit: contain; 
+  padding: 10px;
 }
 
-/* Ajustes para o modal */
 .modal-content {
   border-radius: 10px;
   overflow: hidden;
 }
 
-/* Alinhamento para os botões de navegação no footer do modal */
 .modal-footer .btn {
   min-width: 120px;
 }

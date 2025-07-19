@@ -1,18 +1,39 @@
-import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
 import { NgbCollapseModule, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import { AuthService } from '../../auth/auth.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-cabecalho',
   imports: [
-    NgbCollapseModule, NgbDropdownModule, MatIconModule
+    NgbCollapseModule,
+    NgbDropdownModule,
+    MatIconModule,
+    CommonModule,
   ],
   templateUrl: './cabecalho.component.html',
   styleUrl: './cabecalho.component.css'
 })
-export class CabecalhoComponent {
-    constructor(private router: Router) { }
+
+export class CabecalhoComponent implements OnInit{
+
+  isLoggedIn$!: Observable<boolean>;
+
+  constructor(
+    private authService: AuthService,
+    private router: Router 
+  ) { }
+
+  ngOnInit(): void {
+    this.isLoggedIn$ = this.authService.isLoggedIn$;
+  }
+
+  onLogout(): void {
+    this.authService.logout();
+  }
 
   onLogin(): void {
     this.router.navigate(['/login'])
@@ -20,16 +41,16 @@ export class CabecalhoComponent {
   onHome(): void {
     this.router.navigate(['/home'])
   }
-  onContato(): void{
+  onContato(): void {
     this.router.navigate(['/contato'])
   }
-  onGaleria(): void{
+  onGaleria(): void {
     this.router.navigate(['/galeria'])
   }
-  onSobre(): void{
+  onSobre(): void {
     this.router.navigate(['/sobre'])
   }
-  onCadastro(): void{
+  onCadastro(): void {
     this.router.navigate(['/cadastro'])
   }
 }
