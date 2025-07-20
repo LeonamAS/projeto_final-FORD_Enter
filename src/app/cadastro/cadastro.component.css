@@ -24,13 +24,6 @@
   border-radius: 8px;
 }
 
-.btn-primary {
-  background-color: #0096fa;
-  border-color: #0096fa;
-  border-radius: 8px;
-  font-weight: 600;
-}
-
 .btn-primary:hover {
   background-color: #007bff;
   border-color: #007bff;
@@ -62,7 +55,6 @@ a.text-decoration-none:hover {
   border-radius: 4px; 
   flex-shrink: 0; 
 }
-
 
 .recaptcha-placeholder .small a {
   font-size: 0.75rem;

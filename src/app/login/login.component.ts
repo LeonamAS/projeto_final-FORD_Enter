@@ -26,6 +26,7 @@ export class LoginComponent {
     password: ''
   };
   showPassword = false;
+  loginError = false;
 
   constructor(private auth: AuthService, private router: Router) { }
   
@@ -37,15 +38,19 @@ export class LoginComponent {
   }
 
   onLogin(): void {
+    this.loginError = false; 
+
     if (this.loginData.email && this.loginData.password) {
       const isAuthenticated = this.auth.login(this.loginData.email, this.loginData.password);
       if (isAuthenticated) {
         this.router.navigate(['/userpage']);
       } else {
+        this.loginError = true; 
         console.log('Credenciais inválidas.');
       }
     } else {
       console.warn('Formulário inválido. Preencha todos os campos.');
+      this.loginError = true;
     }
   }
 

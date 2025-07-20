@@ -7,7 +7,7 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    padding: 0 20px;
+    padding: 30px 20px;
 }
 
 .card-login {
@@ -18,3 +18,22 @@
     width: 100px;
 }
 
+.mensagem-erro {
+    color: #dc3545; 
+    border: 1px solid #f5c6cb;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.mensagem-erro mat-icon {
+    margin-left: 8px;
+    font-size: 20px;
+    vertical-align: middle;
+}
+
+.login-card {
+    border-radius: 1rem;
+}
