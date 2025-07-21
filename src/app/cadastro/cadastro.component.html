@@ -45,7 +45,7 @@
                             </div>
                         </div>
                         <div *ngIf="signupForm.submitted && !isRobotChecked" class="invalid-feedback d-block">
-                            Por favor confirme que não é um robô
+                            Por favor, confirme que não é um robô.
                         </div>
                     </div>
 
@@ -53,6 +53,9 @@
                         [disabled]="signupForm.invalid || !isRobotChecked">
                         Avançar
                     </button>
+                    <div *ngIf="errorMessage" class="alert alert-danger mt-3" role="alert">
+                        {{ errorMessage }}
+                    </div>
 
                     <p class="text-center text-muted small mt-4">
                         Esse site é protegido por reCAPTCHA Enterprise e a
@@ -66,6 +69,10 @@
                 </form>
 
                 <form (ngSubmit)="onRegisterUser()" #registerForm="ngForm" *ngIf="showRegistrationForm">
+                    <div class="text-center mb-4">
+                        <h2 class="titulo">Defina sua senha</h2>
+                    </div>
+
                     <div class="mb-3">
                         <label for="regEmail" class="form-label visually-hidden">Endereço de email</label>
                         <input type="email" class="form-control form-control-lg" id="regEmail"
@@ -105,7 +112,7 @@
                                 <i class="material-icons">{{ showPassword ? 'visibility_off' : 'visibility' }}</i>
                             </button>
                             <div *ngIf="signupData.password !== signupData.confirmPassword && signupData.confirmPassword.length > 0"
-                                class="invalid-feedback">
+                                class="invalid-feedback d-block">
                                 As senhas não coincidem.
                             </div>
                         </div>
@@ -115,8 +122,8 @@
                         <input type="checkbox" class="form-check-input" id="consentCheck" name="consent"
                             [(ngModel)]="consentChecked" required>
                         <label class="form-check-label" for="consentCheck">
-                            Ao clicar em cadastrar você concorda com a <a (click)="onPrivacidade()"
-                                target="_blank" class="text-decoration-none">política de privacidade</a>.
+                            Ao clicar em cadastrar você concorda com a <a (click)="onPrivacidade()" target="_blank"
+                                class="text-decoration-none">política de privacidade</a>.
                         </label>
                         <div *ngIf="registerForm.submitted && !consentChecked" class="invalid-feedback d-block">
                             Você deve concordar com a política de privacidade para se cadastrar.
@@ -127,6 +134,9 @@
                         [disabled]="registerForm.invalid || signupData.password !== signupData.confirmPassword || !consentChecked">
                         Cadastrar
                     </button>
+                    <div *ngIf="errorMessage" class="alert alert-danger mt-3" role="alert">
+                        {{ errorMessage }}
+                    </div>
                 </form>
             </div>
         </div>

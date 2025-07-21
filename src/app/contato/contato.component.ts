@@ -18,7 +18,7 @@ import { CommonModule } from '@angular/common';
 })
 export class ContatoComponent implements OnInit {
   contactForm!: FormGroup;
-  
+
   constructor(
     private fb: FormBuilder,
     private router: Router
@@ -28,7 +28,7 @@ export class ContatoComponent implements OnInit {
     this.contactForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      phone: [''], 
+      phone: ['', [Validators.maxLength(11)]],
       subject: ['', Validators.required],
       message: ['', [Validators.required, Validators.minLength(10)]],
       consent: [false, Validators.requiredTrue]
@@ -42,7 +42,7 @@ export class ContatoComponent implements OnInit {
       alert('Mensagem enviada com sucesso!');
       this.contactForm.reset();
       this.contactForm.get('consent')?.setValue(false);
-    } 
+    }
     else {
       console.log('Formulário Inválido');
       this.contactForm.markAllAsTouched();

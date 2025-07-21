@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-cadastro',
@@ -29,8 +30,9 @@ export class CadastroComponent implements OnInit {
   showRegistrationForm: boolean = false;
   consentChecked: boolean = false;
   showPassword = false;
+  errorMessage: string = '';
 
-  constructor(private router: Router) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -40,21 +42,52 @@ export class CadastroComponent implements OnInit {
   }
 
   onCreateAccount(): void {
-    if (this.signupData.email && this.isRobotChecked) {
-      console.log('Tentativa de criar conta com:', this.signupData.email);
-      this.showRegistrationForm = true;
-    } else {
-      console.warn('Formulário inválido. Preencha o email e confirme o reCAPTCHA.');
+    this.errorMessage = '';
+
+    if (!this.signupData.email) {
+      this.errorMessage = 'É necessário inserir um email.';
+      return;
     }
+    if (!this.isRobotChecked) {
+      this.errorMessage = 'Por favor, confirme que não é um robô.';
+      return;
+    }
+
+    if (this.authService.checkUsernameExists(this.signupData.email)) {
+      this.errorMessage = 'Este email já está cadastrado. Por favor, faça login ou use outro email.';
+      return;
+    }
+
+    console.log('Tentativa de criar conta com:', this.signupData.email);
+    this.showRegistrationForm = true;
   }
 
   onRegisterUser(): void {
-    if (this.signupData.password === this.signupData.confirmPassword && this.consentChecked) {
+    this.errorMessage = '';
+
+    if (this.signupData.password !== this.signupData.confirmPassword) {
+      this.errorMessage = 'As senhas não coincidem.';
+      return;
+    }
+
+    if (this.signupData.password.length < 6) {
+      this.errorMessage = 'A senha deve ter pelo menos 6 caracteres.';
+      return;
+    }
+
+    if (!this.consentChecked) {
+      this.errorMessage = 'Você deve concordar com a política de privacidade para se cadastrar.';
+      return;
+    }
+
+    const success = this.authService.register(this.signupData.email, this.signupData.password);
+
+    if (success) {
+      console.log('Usuário registrado com sucesso:', this.signupData.email);
+      this.authService.login(this.signupData.email, this.signupData.password);
       this.router.navigate(['/userpage']);
-    } else if (this.signupData.password !== this.signupData.confirmPassword) {
-      console.warn('As senhas não coincidem.');
-    } else if (!this.consentChecked) {
-      console.warn('É necessário aceitar a política de privacidade.');
+    } else {
+      this.errorMessage = 'Falha ao registrar usuário. O email pode já estar em uso ou outro erro ocorreu.';
     }
   }
 
