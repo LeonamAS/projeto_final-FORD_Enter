@@ -18,13 +18,13 @@ import { Observable } from 'rxjs';
   styleUrl: './cabecalho.component.css'
 })
 
-export class CabecalhoComponent implements OnInit{
+export class CabecalhoComponent implements OnInit {
 
   isLoggedIn$!: Observable<boolean>;
 
   constructor(
     private authService: AuthService,
-    private router: Router 
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -33,24 +33,14 @@ export class CabecalhoComponent implements OnInit{
 
   onLogout(): void {
     this.authService.logout();
+    this.router.navigate(['/home']);
   }
 
-  onLogin(): void {
-    this.router.navigate(['/login'])
-  }
-  onHome(): void {
-    this.router.navigate(['/home'])
-  }
-  onContato(): void {
-    this.router.navigate(['/contato'])
-  }
-  onGaleria(): void {
-    this.router.navigate(['/galeria'])
-  }
-  onSobre(): void {
-    this.router.navigate(['/sobre'])
-  }
-  onCadastro(): void {
-    this.router.navigate(['/cadastro'])
-  }
+  onLogin(): void { this.router.navigate(['/login']); }
+  onHome(): void { this.router.navigate(['/home']); }
+  onContato(): void { this.router.navigate(['/contato']); }
+  onGaleria(): void { this.router.navigate(['/galeria']); }
+  onSobre(): void { this.router.navigate(['/sobre']); }
+  onCadastro(): void { this.router.navigate(['/cadastro']); }
+  onUserpage(): void { this.router.navigate(['/userpage']); }
 }

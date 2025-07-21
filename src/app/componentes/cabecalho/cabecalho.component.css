@@ -32,3 +32,37 @@ a img {
         background-color: aliceblue;
     }
 }
+
+/* Teste */
+
+/* Estilo customizado para o dropdown do usuário */
+.dropdown-menu-user {
+    min-width: 280px; /* Deixa o menu mais largo */
+    background-color: #f8f9fa; /* Um cinza claro como base */
+    border: 1px solid #dee2e6;
+    border-radius: 0.5rem; /* Bordas mais arredondadas */
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+/* Cabeçalho dentro do dropdown */
+.dropdown-user-header {
+    background-color: #e9ecef; /* Um fundo levemente mais escuro para o cabeçalho */
+}
+
+/* Itens do menu */
+.dropdown-menu-user .dropdown-item {
+    padding: 0.75rem 1.5rem;
+    font-weight: 500;
+    color: #495057;
+}
+
+/* Efeito hover nos itens */
+.dropdown-menu-user .dropdown-item:hover {
+    background-color: #dee2e6;
+    color: #212529;
+}
+
+/* Alinha os ícones perfeitamente com o texto */
+.dropdown-menu-user .mat-icon {
+    vertical-align: middle;
+}
