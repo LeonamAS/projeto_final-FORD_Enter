@@ -21,6 +21,7 @@ import { Observable } from 'rxjs';
 export class CabecalhoComponent implements OnInit {
 
   isLoggedIn$!: Observable<boolean>;
+  loggedUserName$!: Observable<string | null>;
 
   constructor(
     private authService: AuthService,
@@ -29,6 +30,7 @@ export class CabecalhoComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoggedIn$ = this.authService.isLoggedIn$;
+    this.loggedUserName$ = this.authService.loggedUserName$;
   }
 
   onLogout(): void {

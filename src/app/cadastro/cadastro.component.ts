@@ -21,6 +21,7 @@ import { AuthService } from '../auth/auth.service';
 })
 export class CadastroComponent implements OnInit {
   signupData = {
+    name: '',
     email: '',
     password: '',
     confirmPassword: ''
@@ -31,6 +32,7 @@ export class CadastroComponent implements OnInit {
   consentChecked: boolean = false;
   showPassword = false;
   errorMessage: string = '';
+  showSuccessCard: boolean = false;
 
   constructor(private authService: AuthService, private router: Router) { }
 
@@ -48,6 +50,13 @@ export class CadastroComponent implements OnInit {
       this.errorMessage = 'É necessário inserir um email.';
       return;
     }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(this.signupData.email)) {
+      this.errorMessage = 'Insira um email válido.';
+      return;
+    }
+
     if (!this.isRobotChecked) {
       this.errorMessage = 'Por favor, confirme que não é um robô.';
       return;
@@ -65,6 +74,11 @@ export class CadastroComponent implements OnInit {
   onRegisterUser(): void {
     this.errorMessage = '';
 
+    if (!this.signupData.name) {
+      this.errorMessage = 'É necessário inserir seu nome.';
+      return;
+    }
+
     if (this.signupData.password !== this.signupData.confirmPassword) {
       this.errorMessage = 'As senhas não coincidem.';
       return;
@@ -80,12 +94,12 @@ export class CadastroComponent implements OnInit {
       return;
     }
 
-    const success = this.authService.register(this.signupData.email, this.signupData.password);
-
+    const success = this.authService.register(this.signupData.name, this.signupData.email, this.signupData.password);
     if (success) {
       console.log('Usuário registrado com sucesso:', this.signupData.email);
       this.authService.login(this.signupData.email, this.signupData.password);
-      this.router.navigate(['/userpage']);
+      this.showRegistrationForm = false;
+      this.showSuccessCard = true;
     } else {
       this.errorMessage = 'Falha ao registrar usuário. O email pode já estar em uso ou outro erro ocorreu.';
     }
@@ -93,5 +107,9 @@ export class CadastroComponent implements OnInit {
 
   togglePasswordVisibility(): void {
     this.showPassword = !this.showPassword;
+  }
+
+  goToDashboard(): void {
+    this.router.navigate(['/userpage']);
   }
 }
