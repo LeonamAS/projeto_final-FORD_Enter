@@ -3,12 +3,12 @@
     <section class="cadastro">
         <div class="signup-container d-flex align-items-center justify-content-center min-vh-100">
             <div class="card signup-card shadow-lg p-4 p-md-5">
-                <form (ngSubmit)="onCreateAccount()" #signupForm="ngForm" *ngIf="!showRegistrationForm && !showSuccessCard">
+                <form (ngSubmit)="onCreateAccount()" #signupForm="ngForm"
+                    *ngIf="!showRegistrationForm && !showSuccessCard">
                     <div class="text-center mb-4">
                         <img src="/img/logo.png" alt="logo" class="logo mb-2">
                         <h2 class="titulo">Crie sua conta</h2>
                     </div>
-
                     <div class="mb-3">
                         <label for="email" class="form-label visually-hidden">Endereço de email</label>
                         <input type="email" class="form-control form-control-lg" id="email"
@@ -21,7 +21,6 @@
                             <div *ngIf="emailField.errors?.['email']">Insira um email válido.</div>
                         </div>
                     </div>
-
                     <div class="mb-4">
                         <div
                             class="recaptcha-placeholder bg-light p-3 border rounded d-flex align-items-center justify-content-between">
@@ -48,7 +47,6 @@
                             Por favor, confirme que não é um robô.
                         </div>
                     </div>
-
                     <button type="submit" class="btn btn-primary btn-lg w-100 mb-3"
                         [disabled]="signupForm.invalid || !isRobotChecked">
                         Avançar
@@ -56,7 +54,6 @@
                     <div *ngIf="errorMessage" class="alert alert-danger mt-3" role="alert">
                         {{ errorMessage }}
                     </div>
-
                     <p class="text-center text-muted small mt-4">
                         Esse site é protegido por reCAPTCHA Enterprise e a
                         <a href="https://policies.google.com/privacy" target="_blank"
@@ -67,31 +64,27 @@
                         da Google se aplicam.
                     </p>
                 </form>
-
-                <form (ngSubmit)="onRegisterUser()" #registerForm="ngForm" *ngIf="showRegistrationForm && !showSuccessCard">
+                <form (ngSubmit)="onRegisterUser()" #registerForm="ngForm"
+                    *ngIf="showRegistrationForm && !showSuccessCard">
                     <div class="text-center mb-4">
                         <h2 class="titulo">Defina seus dados e senha</h2>
                     </div>
-
                     <div class="mb-3">
                         <label for="regEmail" class="form-label visually-hidden">Endereço de email</label>
                         <input type="email" class="form-control form-control-lg" id="regEmail"
                             placeholder="Endereço de email" name="email" [(ngModel)]="signupData.email" required email
                             readonly>
                     </div>
-
                     <div class="mb-3">
                         <label for="name" class="form-label visually-hidden">Nome</label>
-                        <input type="text" class="form-control form-control-lg" id="name"
-                            placeholder="Nome" name="name" [(ngModel)]="signupData.name" required
-                            #nameField="ngModel"
+                        <input type="text" class="form-control form-control-lg" id="name" placeholder="Nome" name="name"
+                            [(ngModel)]="signupData.name" required #nameField="ngModel"
                             [ngClass]="{'is-invalid': nameField.invalid && (nameField.dirty || nameField.touched)}">
                         <div *ngIf="nameField.invalid && (nameField.dirty || nameField.touched)"
                             class="invalid-feedback">
                             <div *ngIf="nameField.errors?.['required']">É necessário inserir seu nome.</div>
                         </div>
                     </div>
-
                     <div class="mb-3">
                         <label for="password" class="form-label visually-hidden">Senha</label>
                         <div class="input-group">
@@ -111,7 +104,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="mb-3">
                         <label for="confirmPassword" class="form-label visually-hidden">Confirmar Senha</label>
                         <div class="input-group">
@@ -129,7 +121,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="mb-4 form-check">
                         <input type="checkbox" class="form-check-input" id="consentCheck" name="consent"
                             [(ngModel)]="consentChecked" required>
@@ -141,7 +132,6 @@
                             Você deve concordar com a política de privacidade para se cadastrar.
                         </div>
                     </div>
-
                     <button type="submit" class="btn btn-success btn-lg w-100 mb-3"
                         [disabled]="registerForm.invalid || signupData.password !== signupData.confirmPassword || !consentChecked">
                         Cadastrar
@@ -150,10 +140,10 @@
                         {{ errorMessage }}
                     </div>
                 </form>
-
                 <div class="card-body text-center" *ngIf="showSuccessCard">
                     <h2 class="card-title text-success mb-3">Cadastro Concluído! 🎉</h2>
-                    <p class="card-text mb-4">Sua conta foi criada com sucesso. Agora você pode acessar o seu dashboard.</p>
+                    <p class="card-text mb-4">Sua conta foi criada com sucesso. Agora você pode acessar o seu dashboard.
+                    </p>
                     <button class="btn btn-primary btn-lg" (click)="goToDashboard()">Ir para o Dashboard</button>
                 </div>
             </div>

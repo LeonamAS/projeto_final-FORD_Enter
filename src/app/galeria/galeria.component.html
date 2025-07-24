@@ -5,7 +5,6 @@
       <h1 class="text-center mb-4 display-4 text-primary titulo">Meus Desenhos</h1>
       <p class="text-center lead">Uma coleção de trabalhos recentes.</p>
       <hr class="mb-5">
-
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 justify-content-center">
         <div class="col" *ngFor="let image of images; let i = index">
           <div class="card h-100 shadow-sm border-0 gallery-card">
@@ -19,7 +18,6 @@
           </div>
         </div>
       </div>
-
       <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-xl">
           <div class="modal-content">

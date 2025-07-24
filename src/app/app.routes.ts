@@ -8,6 +8,7 @@ import { UserpageComponent } from './userpage/userpage.component';
 import { CadastroComponent } from './cadastro/cadastro.component';
 import { PrivacidadeComponent } from './LGPD/privacidade/privacidade.component';
 import { NgModule } from '@angular/core';
+import { TermosDeUsoComponent } from './LGPD/termos/termos.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -18,7 +19,8 @@ export const routes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'userpage', component: UserpageComponent },
     { path: 'cadastro', component: CadastroComponent },
-    { path: 'privacidade', component: PrivacidadeComponent }
+    { path: 'privacidade', component: PrivacidadeComponent },
+    { path: 'termos', component: TermosDeUsoComponent}
 ];
 
 @NgModule({

@@ -20,5 +20,6 @@ main {
     display: flex;
     flex-direction: column;
     overflow: scroll;
+    flex-grow: 1;
     background-color: aliceblue;
 }
