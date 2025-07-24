@@ -2,3 +2,101 @@
 .carrossel {
    
 } */
+/* home.component.css */
+
+.gallery-container {
+  display: flex;
+  gap: 1rem;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: auto;
+  height: 60vh;
+}
+
+.swiper-main {
+  width: 75%;
+  height: 100%;
+}
+
+.swiper-thumbs {
+  width: 25%;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 10px 0;
+}
+
+.swiper-main .swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f0f0;
+}
+
+.swiper-thumbs .swiper-slide {
+  /* Garante que o slide da miniatura seja clicável */
+  position: relative; /* Importante para z-index, se necessário */
+  height: 33.33%;
+  opacity: 0.5;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.swiper-thumbs .swiper-slide-thumb-active {
+  opacity: 1;
+  border: 2px solid #007bff;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* --- */
+
+@media (max-width: 768px) {
+  .gallery-container {
+    flex-direction: column;
+    height: auto;
+    padding: 1rem;
+    /* Ajuste o alinhamento se necessário para não esconder os elementos */
+    align-items: center; /* Centraliza os itens na coluna */
+  }
+
+  .swiper-main {
+    width: 100%;
+    height: 40vh;
+  }
+
+  .swiper-thumbs {
+    width: 100%;
+    height: 15vh; /* Pode ser ajustado, talvez um pouco mais alto se as miniaturas estiverem muito pequenas */
+    display: flex;
+    justify-content: center;
+    /* Certifique-se de que nada está sobrepondo o thumbs */
+    overflow: hidden; /* Evita barras de rolagem indesejadas */
+    padding: 0;
+  }
+
+  .swiper-thumbs .swiper-wrapper {
+    /* Certifica-se que o wrapper das miniaturas se comporta bem */
+    display: flex; /* Garante que o flexbox está ativo para o wrapper */
+    width: 100%; /* Ocupa toda a largura */
+  }
+
+  .swiper-thumbs .swiper-slide {
+    width: 30%; /* Mantém a largura de 30% */
+    height: 100%;
+    margin: 0 5px;
+    /* Adicione estas propriedades para garantir interatividade */
+    pointer-events: auto; /* Garante que eventos de clique não sejam bloqueados */
+    touch-action: manipulation; /* Otimiza a resposta ao toque */
+    flex-shrink: 0; /* Impede que as miniaturas encolham demais */
+  }
+
+  .swiper-thumbs .swiper-slide img {
+    /* Garante que a imagem dentro do slide também seja interativa */
+    pointer-events: none; /* A imagem não deve interceptar o clique, mas sim o slide pai */
+  }
+}
