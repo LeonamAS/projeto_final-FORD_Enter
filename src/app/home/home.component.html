@@ -1,37 +1,77 @@
 <main>
   <app-cabecalho></app-cabecalho>
-
-  <section class="gallery-container">
-
-    <div class="swiper swiper-main">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide">
-          <img src="/img/city.png" alt="Honda City Turbo II" />
+  <section class="carrossel">
+    <div id="carouselExample" class="carousel slide carousel-fade" data-interval="3000" data-bs-pause="false"
+      data-bs-ride="carousel">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="0" class="active"
+          aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="1"
+          aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="2"
+          aria-label="Slide 3"></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="/img/city.png" class="d-block w-100" alt="Honda City Turbo II">
+          <!-- <div class="carousel-caption d-none d-md-block">
+            <h5>First slide label</h5>
+          </div> -->
         </div>
-        <div class="swiper-slide">
-          <img src="/img/beach.png" alt="Beach" />
+        <div class="carousel-item">
+          <img src="/img/beach.png" class="d-block w-100" alt="Beach">
+          <!-- <div class="carousel-caption d-none d-md-block">
+            <h5>Second slide label</h5>
+          </div> -->
         </div>
-        <div class="swiper-slide">
-          <img src="/img/zamtrios.png" alt="Zamtrios" />
+        <div class="carousel-item">
+          <img src="/img/zamtrios.png" class="d-block w-100" alt="Zamtrios">
+          <!-- <div class="carousel-caption d-none d-md-block">
+            <h5>Third slide label</h5>
+          </div> -->
         </div>
-        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
     </div>
-
-    <div class="swiper swiper-thumbs">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide">
-          <img src="/img/city.png" alt="Miniatura Honda City" />
-        </div>
-        <div class="swiper-slide">
-          <img src="/img/beach.png" alt="Miniatura Beach" />
-        </div>
-        <div class="swiper-slide">
-          <img src="/img/zamtrios.png" alt="Miniatura Zamtrios" />
-        </div>
-         </div>
-    </div>
-
   </section>
-
+  <section class="carrossel-mobile">
+    <div id="carouselMobile" class="carousel slide carousel-fade" data-interval="3000" data-bs-pause="false"
+      data-bs-ride="carousel">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselMobile" data-bs-slide-to="0" class="active"
+          aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselMobile" data-bs-slide-to="1"
+          aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselMobile" data-bs-slide-to="2"
+          aria-label="Slide 3"></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="/img/city-mb.png" class="d-block w-100" alt="Honda City Turbo II">
+        </div>
+        <div class="carousel-item">
+          <img src="/img/beach-mb.png" class="d-block w-100" alt="Beach">
+        </div>
+        <div class="carousel-item">
+          <img src="/img/zamtrios-mb.png" class="d-block w-100" alt="Zamtrios">
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselMobile" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselMobile" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </section>
   <app-rodape></app-rodape>
 </main>
