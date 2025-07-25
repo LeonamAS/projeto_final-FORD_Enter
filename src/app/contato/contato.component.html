@@ -24,14 +24,17 @@
                 <div class="col-12">
                     <label for="phone" class="form-label">Telefone (Opcional)</label>
                     <input type="tel" id="phone" formControlName="phone" class="form-control">
+                    <div *ngIf="contactForm.get('phone')?.invalid && contactForm.get('phone')?.touched" class="text-danger">
+                        <span *ngIf="contactForm.get('phone')?.errors?.['minlength']">O telefone deve ter no mínimo {{ contactForm.get('phone')?.errors?.['minlength']?.requiredLength }} dígitos.</span>
+                        <span *ngIf="contactForm.get('phone')?.errors?.['maxlength']">O telefone deve ter no máximo {{ contactForm.get('phone')?.errors?.['maxlength']?.requiredLength }} dígitos.</span>
+                    </div>
                 </div>
                 <div class="col-12">
                     <label for="subject" class="form-label">Motivo do contato</label>
                     <select id="subject" formControlName="subject" class="form-select">
                         <option value=""></option>
                         <option value="general">Dúvidas Gerais</option>
-                        <option value="support">Suporte Técnico</option>
-                        <option value="sales">Questão de Vendas</option>
+                        <option value="sales">Colaborações</option>
                         <option value="feedback">Sugestões</option>
                     </select>
                     <div *ngIf="contactForm.get('subject')?.invalid && contactForm.get('subject')?.touched" class="text-danger">

@@ -1,6 +1,6 @@
-/* .carrossel {
-
-} */
+.carrossel {
+  min-height: 80vh;
+}
 
 .carrossel-mobile {
   display: none;

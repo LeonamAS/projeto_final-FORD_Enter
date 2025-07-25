@@ -28,7 +28,7 @@ export class ContatoComponent implements OnInit {
     this.contactForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      phone: ['', [Validators.maxLength(11)]],
+      phone: ['', [Validators.minLength(10), Validators.maxLength(11)]],
       subject: ['', Validators.required],
       message: ['', [Validators.required, Validators.minLength(10)]],
       consent: [false, Validators.requiredTrue]
@@ -37,8 +37,7 @@ export class ContatoComponent implements OnInit {
 
   onSubmit(): void {
     if (this.contactForm.valid) {
-      console.log('Formulário Válido!');
-      console.log(this.contactForm.value);
+      console.log('Formulário enviado!', this.contactForm.value);
       alert('Mensagem enviada com sucesso!');
       this.contactForm.reset();
       this.contactForm.get('consent')?.setValue(false);
