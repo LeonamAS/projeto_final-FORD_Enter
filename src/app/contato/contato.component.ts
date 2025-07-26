@@ -18,11 +18,9 @@ import { CommonModule } from '@angular/common';
 })
 export class ContatoComponent implements OnInit {
   contactForm!: FormGroup;
+  formSubmitted = false;
 
-  constructor(
-    private fb: FormBuilder,
-    private router: Router
-  ) { }
+  constructor( private fb: FormBuilder, private router: Router ) { }
 
   ngOnInit(): void {
     this.contactForm = this.fb.group({
@@ -38,9 +36,9 @@ export class ContatoComponent implements OnInit {
   onSubmit(): void {
     if (this.contactForm.valid) {
       console.log('Formulário enviado!', this.contactForm.value);
-      alert('Mensagem enviada com sucesso!');
-      this.contactForm.reset();
-      this.contactForm.get('consent')?.setValue(false);
+      this.formSubmitted = true;
+      // this.contactForm.reset();
+      // this.contactForm.get('consent')?.setValue(false);
     }
     else {
       console.log('Formulário Inválido');
@@ -48,7 +46,14 @@ export class ContatoComponent implements OnInit {
     }
   }
 
+  goToHome(): void {
+    this.router.navigate(['/home']);
+  }
+
   onPrivacidade(): void {
     this.router.navigate(['/privacidade'])
+  }
+  onTermos(): void {
+    this.router.navigate(['/termos'])
   }
 }

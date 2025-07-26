@@ -4,11 +4,8 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    min-height: 80vh;
 }
-
-/* .texto p {
-
-} */
 
 .contato a:hover {
     cursor: pointer;
@@ -18,9 +15,4 @@
     .contato {
         margin: 0 10px;
     }
-
-    /* .texto p {
-       
-    } */
-
 }
