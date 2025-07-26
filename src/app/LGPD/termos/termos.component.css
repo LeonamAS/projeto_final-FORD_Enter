@@ -1,0 +1,11 @@
+.nav-link.active {
+    font-weight: bold;
+    color: #007bff !important;
+    border-left: 3px solid #007bff;
+    padding-left: 10px;
+  }
+  
+  #sidebar {
+    top: 20px; 
+    padding-top: 20px;
+  }

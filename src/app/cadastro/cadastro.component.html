@@ -3,7 +3,8 @@
     <section class="cadastro">
         <div class="signup-container d-flex align-items-center justify-content-center min-vh-100">
             <div class="card signup-card shadow-lg p-4 p-md-5">
-                <form (ngSubmit)="onCreateAccount()" #signupForm="ngForm" *ngIf="!showRegistrationForm && !showSuccessCard">
+                <form (ngSubmit)="onCreateAccount()" #signupForm="ngForm"
+                    *ngIf="!showRegistrationForm && !showSuccessCard">
                     <div class="text-center mb-4">
                         <img src="/img/logo.png" alt="logo" class="logo mb-2">
                         <h2 class="titulo">Crie sua conta</h2>
@@ -74,9 +75,8 @@
                     </div>
                     <div class="mb-3">
                         <label for="name" class="form-label visually-hidden">Nome</label>
-                        <input type="text" class="form-control form-control-lg" id="name"
-                            placeholder="Nome" name="name" [(ngModel)]="signupData.name" required
-                            #nameField="ngModel"
+                        <input type="text" class="form-control form-control-lg" id="name" placeholder="Nome" name="name"
+                            [(ngModel)]="signupData.name" required #nameField="ngModel"
                             [ngClass]="{'is-invalid': nameField.invalid && (nameField.dirty || nameField.touched)}">
                         <div *ngIf="nameField.invalid && (nameField.dirty || nameField.touched)"
                             class="invalid-feedback">
@@ -140,7 +140,8 @@
                 </form>
                 <div class="card-body text-center" *ngIf="showSuccessCard">
                     <h2 class="card-title text-success mb-3">Cadastro Concluído! 🎉</h2>
-                    <p class="card-text mb-4">Sua conta foi criada com sucesso. Agora você pode acessar o seu dashboard.</p>
+                    <p class="card-text mb-4">Sua conta foi criada com sucesso. Agora você pode acessar o seu dashboard.
+                    </p>
                     <button class="btn btn-primary btn-lg" (click)="goToDashboard()">Ir para o Dashboard</button>
                 </div>
             </div>
