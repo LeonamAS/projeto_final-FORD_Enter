@@ -39,9 +39,8 @@ export class CadastroComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onPrivacidade(): void {
-    this.router.navigate(['/privacidade'])
-  }
+  onPrivacidade(): void { this.router.navigate(['/privacidade']) }
+  onTermos(): void { this.router.navigate(['/termos']) }
 
   onCreateAccount(): void {
     this.errorMessage = '';

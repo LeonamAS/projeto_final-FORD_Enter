@@ -20,7 +20,7 @@ export class ContatoComponent implements OnInit {
   contactForm!: FormGroup;
   formSubmitted = false;
 
-  constructor( private fb: FormBuilder, private router: Router ) { }
+  constructor(private fb: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
     this.contactForm = this.fb.group({
@@ -46,14 +46,8 @@ export class ContatoComponent implements OnInit {
     }
   }
 
-  goToHome(): void {
-    this.router.navigate(['/home']);
-  }
-
-  onPrivacidade(): void {
-    this.router.navigate(['/privacidade'])
-  }
-  onTermos(): void {
-    this.router.navigate(['/termos'])
-  }
+  goToHome(): void { this.router.navigate(['/home']); }
+  onPrivacidade(): void { this.router.navigate(['/privacidade']) }
+  onTermos(): void { this.router.navigate(['/termos']) }
+  onLogin(): void { this.router.navigate(['/login']); }
 }

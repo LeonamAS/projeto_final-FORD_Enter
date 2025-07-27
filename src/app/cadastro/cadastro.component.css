@@ -1,3 +1,6 @@
+.cadastro a:hover {
+  cursor: pointer;
+}
 
 .signup-container {
   background-image: url('/img/beach.jpg'); 

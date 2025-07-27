@@ -22,7 +22,8 @@
                         </div>
                     </div>
                     <div class="mb-4">
-                        <div class="recaptcha-placeholder bg-light p-3 border rounded d-flex align-items-center justify-content-between">
+                        <div
+                            class="recaptcha-placeholder bg-light p-3 border rounded d-flex align-items-center justify-content-between">
                             <label class="form-check-label d-flex align-items-center mb-0" for="recaptchaCheck">
                                 <input class="form-check-input me-2" type="checkbox" id="recaptchaCheck"
                                     [(ngModel)]="isRobotChecked" name="recaptcha" required>
@@ -63,7 +64,8 @@
                         da Google se aplicam.
                     </p>
                 </form>
-                <form (ngSubmit)="onRegisterUser()" #registerForm="ngForm" *ngIf="showRegistrationForm && !showSuccessCard">
+                <form (ngSubmit)="onRegisterUser()" #registerForm="ngForm"
+                    *ngIf="showRegistrationForm && !showSuccessCard">
                     <div class="text-center mb-4">
                         <h2 class="titulo">Defina seus dados e senha</h2>
                     </div>
@@ -123,8 +125,10 @@
                         <input type="checkbox" class="form-check-input" id="consentCheck" name="consent"
                             [(ngModel)]="consentChecked" required>
                         <label class="form-check-label" for="consentCheck">
-                            Ao clicar em cadastrar você concorda com a <a (click)="onPrivacidade()" target="_blank"
-                                class="text-decoration-none">política de privacidade</a>.
+                            Ao clicar em cadastrar você concorda com os
+                            <a (click)="onTermos()" class="text-decoration-none">Termos de Uso</a>
+                            e a <a (click)="onPrivacidade()" target="_blank" class="text-decoration-none">Política de
+                                Privacidade</a>.
                         </label>
                         <div *ngIf="registerForm.submitted && !consentChecked" class="invalid-feedback d-block">
                             Você deve concordar com a política de privacidade para se cadastrar.
