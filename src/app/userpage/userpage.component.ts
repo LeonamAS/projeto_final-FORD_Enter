@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CabecalhoComponent } from '../componentes/cabecalho/cabecalho.component';
 import { RodapeComponent } from '../componentes/rodape/rodape.component';
 import { CommonModule, CurrencyPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../auth/auth.service';
+import { combineLatest, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 interface IServico {
   id: number;
@@ -41,38 +43,38 @@ interface IUserInfo {
   templateUrl: './userpage.component.html',
   styleUrl: './userpage.component.css'
 })
-export class UserpageComponent implements OnInit {
+export class UserpageComponent implements OnInit, OnDestroy {
   activeTab: 'fazerPedido' | 'meusPedidos' | 'minhasInformacoes' = 'fazerPedido';
 
   servicos: IServico[] = [
     {
       id: 1,
-      imagem: 'https://placehold.co/400x300/6610f2/white?text=Arte+Digital',
-      titulo: 'Paisagem de Fantasia',
-      descricao: 'Pintura digital de alta resolução',
-      preco: 120.99
+      imagem: '/img/200.jpg', 
+      titulo: 'Texto Estilo Graffiti',
+      descricao: 'Nome ou frase com arte de rua vibrante',
+      preco: 60.00
     },
     {
       id: 2,
-      imagem: 'https://placehold.co/400x300/dc3545/white?text=Personagem',
-      titulo: 'Kit de Personagens de Anime',
-      descricao: '5 designs de personagens únicos',
-      preco: 90.99
+      imagem: '/img/kitchen.jpg', 
+      titulo: 'Desenho Realista à Lápis',
+      descricao: 'Retratos e objetos detalhados em grafite',
+      preco: 150.00,
+      popular: true 
     },
     {
       id: 3,
-      imagem: 'https://placehold.co/400x300/6f42c1/white?text=Texturas',
-      titulo: 'Texturas de Aquarela',
-      descricao: '30 texturas contínuas',
-      preco: 70.99
+      imagem: '/img/beach.jpg', 
+      titulo: 'Paisagem em Lápis de Cor',
+      descricao: 'Cenários coloridos e expressivos',
+      preco: 110.00
     },
     {
       id: 4,
-      imagem: 'https://placehold.co/400x300/ffc107/white?text=Pincéis',
-      titulo: 'Pacote de Pincéis Procreate',
-      descricao: '50 pincéis premium',
-      preco: 150.99,
-      popular: true
+      imagem: '/img/zamtrios.jpg', 
+      titulo: 'Desenho de Animal/Objeto',
+      descricao: 'Ilustrações vívidas e charmosas',
+      preco: 85.00
     }
   ];
 
@@ -91,28 +93,39 @@ export class UserpageComponent implements OnInit {
   private currentUsernameForId: string | null = null;
   private currentUserNameForDisplay: string | null = null;
 
+  private destroy$ = new Subject<void>();
+
+  message: string = '';
+  messageType: 'success' | 'danger' | 'warning' | '' = '';
+
   constructor(private authService: AuthService) { }
 
-ngOnInit(): void {
-    this.authService.loggedUserName$.subscribe(userNameDisplay => {
-      this.authService.isLoggedIn$.subscribe(isLoggedIn => {
-        if (isLoggedIn) {
-          const storedUsername = localStorage.getItem('loggedUserName');
-          this.currentUserNameForDisplay = userNameDisplay; 
-          this.currentUsernameForId = storedUsername; 
-
-          if (this.currentUsernameForId) {
-            this.loadUserInfo(); 
-            this.loadOrders(); 
-          }
+  ngOnInit(): void {
+    combineLatest([
+      this.authService.isLoggedIn$,
+      this.authService.loggedUserName$,
+      this.authService.loggedUserUsername$
+    ]).pipe(takeUntil(this.destroy$))
+      .subscribe(([isLoggedIn, userNameDisplay, userUsername]) => {
+        if (isLoggedIn && userUsername) {
+          this.currentUserNameForDisplay = userNameDisplay;
+          this.currentUsernameForId = userUsername;
+          this.loadUserInfo();
+          this.loadOrders();
         } else {
           this.currentUserNameForDisplay = null;
           this.currentUsernameForId = null;
           this.userInfo = { name: '', email: '', phone: '', address: '' };
           this.orders = [];
+          this.message = '';
+          this.messageType = '';
         }
       });
-    });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   changeTab(tab: 'fazerPedido' | 'meusPedidos' | 'minhasInformacoes') {
@@ -121,7 +134,7 @@ ngOnInit(): void {
 
   fazerPedido(servico: IServico): void {
     if (!this.currentUsernameForId) {
-      alert('Você precisa estar logado para fazer um pedido.');
+      this.showMessage('Você precisa estar logado para fazer um pedido.', 'warning');
       this.activeTab = 'fazerPedido';
       return;
     }
@@ -142,19 +155,19 @@ ngOnInit(): void {
     this.saveOrders();
     this.activeTab = 'meusPedidos';
 
-    alert(`Serviço "${servico.titulo}" adicionado ao carrinho!`);
+    this.showMessage(`Serviço "${servico.titulo}" adicionado aos seus pedidos!`, 'success');
   }
 
   toggleEditMode(): void {
     if (!this.currentUsernameForId) {
-      alert('Faça login para editar suas informações.');
+      this.showMessage('Faça login para editar suas informações.', 'warning');
       return;
     }
 
     this.editMode = !this.editMode;
     if (!this.editMode) {
       this.saveUserInfo();
-      alert('Informações salvas com sucesso!');
+      this.showMessage('Informações salvas com sucesso!', 'success');
     }
   }
 
@@ -168,12 +181,11 @@ ngOnInit(): void {
 
   private saveOrders(): void {
     if (!this.currentUsernameForId) return;
-
     try {
       localStorage.setItem(this.getOrdersLocalStorageKey(), JSON.stringify(this.orders));
     } catch (e) {
       console.error('Erro ao salvar pedidos no localStorage', e);
-      alert('Não foi possível salvar os pedidos. Verifique as configurações do navegador.');
+      this.showMessage('Não foi possível salvar os pedidos. Verifique as configurações do navegador.', 'danger');
     }
   }
 
@@ -182,7 +194,6 @@ ngOnInit(): void {
       this.orders = [];
       return;
     }
-
     try {
       const storedOrders = localStorage.getItem(this.getOrdersLocalStorageKey());
       if (storedOrders) {
@@ -200,7 +211,7 @@ ngOnInit(): void {
       }
     } catch (e) {
       console.error('Erro ao carregar pedidos do localStorage', e);
-      alert('Não foi possível carregar os pedidos anteriores. O aplicativo iniciará com uma lista vazia.');
+      this.showMessage('Não foi possível carregar os pedidos anteriores. O aplicativo iniciará com uma lista vazia.', 'danger');
       this.orders = [];
     }
   }
@@ -210,13 +221,12 @@ ngOnInit(): void {
   }
 
   private saveUserInfo(): void {
-    if (!this.currentUsernameForId) return; 
-
+    if (!this.currentUsernameForId) return;
     try {
       localStorage.setItem(this.getUserInfoLocalStorageKey(), JSON.stringify(this.userInfo));
     } catch (e) {
       console.error('Erro ao salvar informações do usuário no localStorage', e);
-      alert('Não foi possível salvar suas informações. Verifique as configurações do navegador.');
+      this.showMessage('Não foi possível salvar suas informações. Verifique as configurações do navegador.', 'danger');
     }
   }
 
@@ -225,7 +235,6 @@ ngOnInit(): void {
       this.userInfo = { name: '', email: '', phone: '', address: '' };
       return;
     }
-
     try {
       const storedUserInfo = localStorage.getItem(this.getUserInfoLocalStorageKey());
       if (storedUserInfo) {
@@ -233,7 +242,7 @@ ngOnInit(): void {
         this.userInfo.email = this.currentUsernameForId;
       } else {
         this.userInfo = {
-          name: this.currentUserNameForDisplay || '', 
+          name: this.currentUserNameForDisplay || '',
           email: this.currentUsernameForId,
           phone: '',
           address: ''
@@ -241,7 +250,7 @@ ngOnInit(): void {
       }
     } catch (e) {
       console.error('Erro ao carregar informações do usuário do localStorage', e);
-      alert('Não foi possível carregar suas informações anteriores. As informações padrão serão usadas.');
+      this.showMessage('Não foi possível carregar suas informações anteriores. As informações padrão serão usadas.', 'danger');
       this.userInfo = {
         name: this.currentUserNameForDisplay || '',
         email: this.currentUsernameForId || '',
@@ -249,5 +258,14 @@ ngOnInit(): void {
         address: ''
       };
     }
+  }
+
+  showMessage(msg: string, type: 'success' | 'danger' | 'warning'): void {
+    this.message = msg;
+    this.messageType = type;
+    setTimeout(() => {
+      this.message = '';
+      this.messageType = '';
+    }, 3000);
   }
 }

@@ -2,6 +2,10 @@
     <app-cabecalho></app-cabecalho>
     <section class="userpage">
         <section class="container py-5">
+            <div *ngIf="message" class="alert alert-{{messageType}} alert-dismissible fade show mb-4" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" (click)="message=''" aria-label="Close"></button>
+            </div>
             <ul class="nav nav-tabs justify-content-center mb-4">
                 <li class="nav-item">
                     <button class="nav-link" [class.active]="activeTab === 'fazerPedido'"
@@ -87,22 +91,27 @@
                     <div class="row g-3">
                         <div class="col-md-6">
                             <label for="nomeUsuario" class="form-label">Nome Completo</label>
-                            <input type="text" class="form-control" id="nomeUsuario" [(ngModel)]="userInfo.name" disabled>
+                            <input type="text" class="form-control" id="nomeUsuario" [(ngModel)]="userInfo.name"
+                                [disabled]="!editMode">
                         </div>
                         <div class="col-md-6">
                             <label for="emailUsuario" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="emailUsuario" [(ngModel)]="userInfo.email" disabled>
+                            <input type="email" class="form-control" id="emailUsuario" [(ngModel)]="userInfo.email"
+                                disabled>
                         </div>
                         <div class="col-md-6">
                             <label for="telefoneUsuario" class="form-label">Telefone</label>
-                            <input type="tel" class="form-control" id="telefoneUsuario" [(ngModel)]="userInfo.phone" disabled>
+                            <input type="tel" class="form-control" id="telefoneUsuario" [(ngModel)]="userInfo.phone"
+                                [disabled]="!editMode">
                         </div>
                         <div class="col-md-6">
                             <label for="enderecoUsuario" class="form-label">Endereço</label>
-                            <input type="text" class="form-control" id="enderecoUsuario" [(ngModel)]="userInfo.address" disabled>
+                            <input type="text" class="form-control" id="enderecoUsuario" [(ngModel)]="userInfo.address"
+                                [disabled]="!editMode">
                         </div>
                         <div class="col-12 text-end">
-                            <button class="btn btn-primary" (click)="toggleEditMode()">{{ editMode ? 'Salvar' : 'Editar' }}</button>
+                            <button class="btn btn-primary" (click)="toggleEditMode()">{{ editMode ? 'Salvar' : 'Editar'
+                                }}</button>
                         </div>
                     </div>
                 </div>
