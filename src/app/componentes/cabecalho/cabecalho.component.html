@@ -1,6 +1,6 @@
 <section class="cabecalho">
   <div class="container">
-    <nav class="navbar navbar-expand-md py-3 mb-4 border-bottom">
+    <nav class="navbar navbar-expand-md py-3">
       <div class="container-fluid">
         <a (click)="onHome()" class="navbar-brand d-inline-flex">
           <img src="/img/logo.png" alt="logo">
@@ -11,9 +11,9 @@
         </button>
         <div class="collapse navbar-collapse menu" id="navbarNav">
           <ul class="navbar-nav justify-content-center flex-grow-1 mb-2 mb-md-0 menu">
-            <a (click)="onGaleria()" class="nav-link px-2 text-primary">Galeria</a>
-            <a (click)="onSobre()" class="nav-link px-2 text-primary">Sobre</a>
-            <a (click)="onContato()" class="nav-link px-2 text-primary">Contato</a>
+            <a (click)="onGaleria()" class="nav-link px-3 text-primary">Galeria</a>
+            <a (click)="onSobre()" class="nav-link px-3 text-primary">Sobre</a>
+            <a (click)="onContato()" class="nav-link px-3 text-primary">Contato</a>
           </ul>
           <div class="d-flex ms-auto"> <ng-container *ngIf="isLoggedIn$ | async; else naoLogado">
               <div ngbDropdown class="d-inline-block">

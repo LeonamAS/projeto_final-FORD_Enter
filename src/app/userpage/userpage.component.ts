@@ -7,32 +7,14 @@ import { AuthService } from '../auth/auth.service';
 import { combineLatest, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-interface IServico {
-  id: number;
-  imagem: string;
-  titulo: string;
-  descricao: string;
-  preco: number;
-  popular?: boolean;
-}
-
-interface IPedido {
-  date: string;
-  orderNumber: string;
-  paymentMethod: string;
-  value: string;
-  status: 'Concluído' | 'Cancelado' | 'Em andamento';
-}
-
-interface IUserInfo {
-  name: string;
-  email: string;
-  phone: string;
-  address: string;
-}
+import { Servico } from './servico';
+import { Pedido } from './pedido';
+import { UserInfo } from './userinfo';
+import { servicos as mockServicos, orders as mockOrders, userInfo as mockUserInfo } from '../mockAPI';
 
 @Component({
   selector: 'app-userpage',
+  standalone: true,
   imports: [
     CabecalhoComponent,
     RodapeComponent,
@@ -46,47 +28,18 @@ interface IUserInfo {
 export class UserpageComponent implements OnInit, OnDestroy {
   activeTab: 'fazerPedido' | 'meusPedidos' | 'minhasInformacoes' = 'fazerPedido';
 
-  servicos: IServico[] = [
-    {
-      id: 1,
-      imagem: '/img/200.jpg', 
-      titulo: 'Texto Estilo Graffiti',
-      descricao: 'Nome ou frase com arte de rua vibrante',
-      preco: 60.00
-    },
-    {
-      id: 2,
-      imagem: '/img/kitchen.jpg', 
-      titulo: 'Desenho Realista à Lápis',
-      descricao: 'Retratos e objetos detalhados em grafite',
-      preco: 150.00,
-      popular: true 
-    },
-    {
-      id: 3,
-      imagem: '/img/beach.jpg', 
-      titulo: 'Paisagem em Lápis de Cor',
-      descricao: 'Cenários coloridos e expressivos',
-      preco: 110.00
-    },
-    {
-      id: 4,
-      imagem: '/img/zamtrios.jpg', 
-      titulo: 'Desenho de Animal/Objeto',
-      descricao: 'Ilustrações vívidas e charmosas',
-      preco: 85.00
-    }
-  ];
+  servicos: Servico[] = mockServicos;
 
-  orders: IPedido[] = [];
+  orders: Pedido[] = [];
+
   private LOCAL_STORAGE_ORDERS_PREFIX = 'userOrders_';
 
-  userInfo: IUserInfo = {
+  userInfo: UserInfo = {
     name: '',
     email: '',
     phone: '',
     address: ''
-  };
+  }; 
   editMode: boolean = false;
   private LOCAL_STORAGE_USERINFO_PREFIX = 'userInfo_';
 
@@ -115,8 +68,8 @@ export class UserpageComponent implements OnInit, OnDestroy {
         } else {
           this.currentUserNameForDisplay = null;
           this.currentUsernameForId = null;
-          this.userInfo = { name: '', email: '', phone: '', address: '' };
-          this.orders = [];
+          this.userInfo = { ...mockUserInfo }; 
+          this.orders = []; 
           this.message = '';
           this.messageType = '';
         }
@@ -132,7 +85,7 @@ export class UserpageComponent implements OnInit, OnDestroy {
     this.activeTab = tab;
   }
 
-  fazerPedido(servico: IServico): void {
+  fazerPedido(servico: Servico): void {
     if (!this.currentUsernameForId) {
       this.showMessage('Você precisa estar logado para fazer um pedido.', 'warning');
       this.activeTab = 'fazerPedido';
@@ -143,7 +96,7 @@ export class UserpageComponent implements OnInit, OnDestroy {
     const formattedDate = now.toLocaleDateString('pt-BR');
     const orderNumber = '#' + Date.now().toString().slice(-7) + Math.floor(Math.random() * 1000);
 
-    const novoPedido: IPedido = {
+    const novoPedido: Pedido = {
       date: formattedDate,
       orderNumber: orderNumber,
       paymentMethod: 'Aguardando Pagamento',
@@ -199,15 +152,7 @@ export class UserpageComponent implements OnInit, OnDestroy {
       if (storedOrders) {
         this.orders = JSON.parse(storedOrders);
       } else {
-        this.orders = [
-          { date: '07/04/2025', orderNumber: '#2004459', paymentMethod: 'Pix', value: 'R$ 23,94', status: 'Concluído' },
-          { date: '10/06/2024', orderNumber: '#2009152', paymentMethod: 'Cartão de Crédito', value: 'R$ 41,79', status: 'Concluído' },
-          { date: '05/07/2023', orderNumber: '#2007001', paymentMethod: 'Cartão de Crédito', value: 'R$ 91,49', status: 'Concluído' },
-          { date: '23/12/2022', orderNumber: '#2012142', paymentMethod: 'Boleto Bancário', value: 'R$ 76,52', status: 'Concluído' },
-          { date: '23/12/2022', orderNumber: '#2012144', paymentMethod: 'Cartão de Crédito', value: 'R$ 102,51', status: 'Cancelado' },
-          { date: '22/12/2021', orderNumber: '#2012219', paymentMethod: 'Boleto Bancário', value: 'R$ 52,51', status: 'Cancelado' },
-          { date: '25/06/2021', orderNumber: '#2006843', paymentMethod: 'Cartão de Crédito', value: 'R$ 68,99', status: 'Concluído' }
-        ];
+        this.orders = [...mockOrders];
       }
     } catch (e) {
       console.error('Erro ao carregar pedidos do localStorage', e);
@@ -232,7 +177,7 @@ export class UserpageComponent implements OnInit, OnDestroy {
 
   private loadUserInfo(): void {
     if (!this.currentUsernameForId) {
-      this.userInfo = { name: '', email: '', phone: '', address: '' };
+      this.userInfo = { ...mockUserInfo };
       return;
     }
     try {
@@ -242,20 +187,20 @@ export class UserpageComponent implements OnInit, OnDestroy {
         this.userInfo.email = this.currentUsernameForId;
       } else {
         this.userInfo = {
-          name: this.currentUserNameForDisplay || '',
+          name: this.currentUserNameForDisplay || mockUserInfo.name,
           email: this.currentUsernameForId,
-          phone: '',
-          address: ''
+          phone: mockUserInfo.phone,
+          address: mockUserInfo.address
         };
       }
     } catch (e) {
       console.error('Erro ao carregar informações do usuário do localStorage', e);
       this.showMessage('Não foi possível carregar suas informações anteriores. As informações padrão serão usadas.', 'danger');
       this.userInfo = {
-        name: this.currentUserNameForDisplay || '',
+        name: this.currentUserNameForDisplay || mockUserInfo.name,
         email: this.currentUsernameForId || '',
-        phone: '',
-        address: ''
+        phone: mockUserInfo.phone,
+        address: mockUserInfo.address
       };
     }
   }
