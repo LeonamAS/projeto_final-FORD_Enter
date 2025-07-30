@@ -15,7 +15,8 @@
             <a (click)="onSobre()" class="nav-link px-3 text-primary">Sobre</a>
             <a (click)="onContato()" class="nav-link px-3 text-primary">Contato</a>
           </ul>
-          <div class="d-flex ms-auto"> <ng-container *ngIf="isLoggedIn$ | async; else naoLogado">
+          <div class="d-flex ms-auto">
+            <ng-container *ngIf="isLoggedIn$ | async; else naoLogado">
               <div ngbDropdown class="d-inline-block">
                 <button type="button" class="btn btn-link text-decoration-none p-0" id="dropdownUser" ngbDropdownToggle>
                   <img src="/img/logo.png" alt="Avatar do usuário" class="rounded-circle me-2"
@@ -23,14 +24,17 @@
                   <span class="d-none d-md-inline text-dark">Olá, {{ loggedUserName$ | async }}!</span>
                 </button>
                 <div ngbDropdownMenu aria-labelledby="dropdownUser" class="dropdown-menu-user">
-                  <a ngbDropdownItem (click)="onUserpage()" class="d-flex align-items-center">
+                  <a ngbDropdownItem (click)="onUserpage('fazerPedido')" class="d-flex align-items-center">
                     <mat-icon class="me-2">grid_view</mat-icon> Dashboard
                   </a>
-                  <a ngbDropdownItem (click)="onUserpage()" class="d-flex align-items-center">
+                  <a ngbDropdownItem (click)="onUserpage('meusPedidos')" class="d-flex align-items-center">
                     <mat-icon class="me-2">receipt_long</mat-icon> Meus Pedidos
                   </a>
-                  <a ngbDropdownItem (click)="onUserpage()" class="d-flex align-items-center">
+                  <a ngbDropdownItem (click)="onUserpage('minhasInformacoes')" class="d-flex align-items-center">
                     <mat-icon class="me-2">account_circle</mat-icon> Minha Conta
+                  </a>
+                  <a ngbDropdownItem (click)="onUserpage('adminPanel')" class="d-flex align-items-center" *ngIf="isAdmin$ | async">
+                    <mat-icon class="me-2">security</mat-icon> Painel Admin
                   </a>
                   <div class="dropdown-divider"></div>
                   <a ngbDropdownItem (click)="onLogout()" class="d-flex align-items-center text-danger">

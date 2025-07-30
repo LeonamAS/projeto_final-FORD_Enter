@@ -1,16 +1,17 @@
+import { CabecalhoComponent } from './../cabecalho/cabecalho.component';
+import { RodapeComponent } from './../rodape/rodape.component';
+import { AuthService } from './../../auth/auth.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { CabecalhoComponent } from '../componentes/cabecalho/cabecalho.component';
-import { RodapeComponent } from '../componentes/rodape/rodape.component';
 import { CommonModule, CurrencyPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { AuthService } from '../auth/auth.service';
-import { combineLatest, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { combineLatest, Subject, Observable } from 'rxjs'; 
+import { takeUntil, map } from 'rxjs/operators'; 
+import { ActivatedRoute } from '@angular/router';
 
 import { Servico } from './servico';
 import { Pedido } from './pedido';
 import { UserInfo } from './userinfo';
-import { servicos as mockServicos, orders as mockOrders, userInfo as mockUserInfo } from '../mockAPI';
+import { servicos as mockServicos, orders as mockOrders, userInfo as mockUserInfo } from '../../mockAPI';
 
 @Component({
   selector: 'app-userpage',
@@ -26,10 +27,9 @@ import { servicos as mockServicos, orders as mockOrders, userInfo as mockUserInf
   styleUrl: './userpage.component.css'
 })
 export class UserpageComponent implements OnInit, OnDestroy {
-  activeTab: 'fazerPedido' | 'meusPedidos' | 'minhasInformacoes' = 'fazerPedido';
+  activeTab: 'fazerPedido' | 'meusPedidos' | 'minhasInformacoes' | 'adminPanel' = 'fazerPedido';
 
   servicos: Servico[] = mockServicos;
-
   orders: Pedido[] = [];
 
   private LOCAL_STORAGE_ORDERS_PREFIX = 'userOrders_';
@@ -39,7 +39,7 @@ export class UserpageComponent implements OnInit, OnDestroy {
     email: '',
     phone: '',
     address: ''
-  }; 
+  };
   editMode: boolean = false;
   private LOCAL_STORAGE_USERINFO_PREFIX = 'userInfo_';
 
@@ -51,9 +51,25 @@ export class UserpageComponent implements OnInit, OnDestroy {
   message: string = '';
   messageType: 'success' | 'danger' | 'warning' | '' = '';
 
-  constructor(private authService: AuthService) { }
+  isAdmin$!: Observable<boolean>;
+
+  constructor(
+    private authService: AuthService,
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
+    this.isAdmin$ = this.authService.userRole$.pipe(
+      map(role => role === 'admin')
+    );
+
+    this.route.queryParams.pipe(takeUntil(this.destroy$)).subscribe(params => {
+      const tabParam = params['tab'];
+      if (tabParam && ['fazerPedido', 'meusPedidos', 'minhasInformacoes', 'adminPanel'].includes(tabParam)) {
+        this.activeTab = tabParam as 'fazerPedido' | 'meusPedidos' | 'minhasInformacoes' | 'adminPanel';
+      }
+    });
+
     combineLatest([
       this.authService.isLoggedIn$,
       this.authService.loggedUserName$,
@@ -68,8 +84,8 @@ export class UserpageComponent implements OnInit, OnDestroy {
         } else {
           this.currentUserNameForDisplay = null;
           this.currentUsernameForId = null;
-          this.userInfo = { ...mockUserInfo }; 
-          this.orders = []; 
+          this.userInfo = { ...mockUserInfo };
+          this.orders = [];
           this.message = '';
           this.messageType = '';
         }
@@ -81,7 +97,7 @@ export class UserpageComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  changeTab(tab: 'fazerPedido' | 'meusPedidos' | 'minhasInformacoes') {
+  changeTab(tab: 'fazerPedido' | 'meusPedidos' | 'minhasInformacoes' | 'adminPanel') {
     this.activeTab = tab;
   }
 

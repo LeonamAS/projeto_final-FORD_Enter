@@ -1,6 +1,6 @@
-import { Pedido } from "./userpage/pedido";
-import { Servico } from "./userpage/servico";
-import { UserInfo } from "./userpage/userinfo";
+import { Pedido } from "./componentes/userpage/pedido";
+import { Servico } from "./componentes/userpage/servico";
+import { UserInfo } from "./componentes/userpage/userinfo";
 
 export const servicos: Servico[] = [
     {

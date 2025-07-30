@@ -19,10 +19,14 @@
                     <button class="nav-link" [class.active]="activeTab === 'minhasInformacoes'"
                         (click)="changeTab('minhasInformacoes')" type="button">Minhas Informações</button>
                 </li>
+                <li class="nav-item" *ngIf="isAdmin$ | async">
+                    <button class="nav-link" [class.active]="activeTab === 'adminPanel'"
+                        (click)="changeTab('adminPanel')" type="button">Painel Admin</button>
+                </li>
             </ul>
             <div *ngIf="activeTab === 'fazerPedido'">
                 <div class="d-flex justify-content-between align-items-center mb-4">
-                    <h2 class="fw-bold fs-2">Faça seu pedido:</h2>
+                    <h2 class="fw-bold fs-2">Faça seu pedido</h2>
                 </div>
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
                     <div class="col" *ngFor="let servico of servicos">
@@ -114,6 +118,21 @@
                                 }}</button>
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <div *ngIf="activeTab === 'adminPanel' && (isAdmin$ | async)">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2 class="fw-bold fs-2 text-dark">Painel do Administrador</h2>
+                </div>
+                <div class="card border shadow-lg p-4">
+                    <p>Bem-vindo ao painel de administração!</p>
+                    <p>Aqui você pode gerenciar usuários, pedidos e configurações do sistema.</p>
+                    <ul>
+                        <li><a href="#">Gerenciar Usuários</a></li>
+                        <li><a href="#">Visualizar Todos os Pedidos</a></li>
+                        <li><a href="#">Configurações do Site</a></li>
+                    </ul>
                 </div>
             </div>
         </section>

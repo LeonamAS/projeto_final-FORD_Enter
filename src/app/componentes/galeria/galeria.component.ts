@@ -1,6 +1,6 @@
 import { Component, OnInit} from '@angular/core';
-import { CabecalhoComponent } from '../componentes/cabecalho/cabecalho.component';
-import { RodapeComponent } from '../componentes/rodape/rodape.component';
+import { CabecalhoComponent } from '../cabecalho/cabecalho.component';
+import { RodapeComponent } from '../rodape/rodape.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 

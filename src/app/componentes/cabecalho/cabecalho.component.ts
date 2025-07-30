@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { NgbCollapseModule, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from '../../auth/auth.service';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-cabecalho',
@@ -22,6 +23,7 @@ export class CabecalhoComponent implements OnInit {
 
   isLoggedIn$!: Observable<boolean>;
   loggedUserName$!: Observable<string | null>;
+  isAdmin$!: Observable<boolean>;
 
   constructor(
     private authService: AuthService,
@@ -31,6 +33,9 @@ export class CabecalhoComponent implements OnInit {
   ngOnInit(): void {
     this.isLoggedIn$ = this.authService.isLoggedIn$;
     this.loggedUserName$ = this.authService.loggedUserName$;
+    this.isAdmin$ = this.authService.userRole$.pipe(
+      map(role => role === 'admin')
+    );
   }
 
   onLogout(): void {
@@ -44,5 +49,8 @@ export class CabecalhoComponent implements OnInit {
   onGaleria(): void { this.router.navigate(['/galeria']); }
   onSobre(): void { this.router.navigate(['/sobre']); }
   onCadastro(): void { this.router.navigate(['/cadastro']); }
-  onUserpage(): void { this.router.navigate(['/userpage']); }
+
+  onUserpage(tab: 'fazerPedido' | 'meusPedidos' | 'minhasInformacoes' | 'adminPanel' = 'fazerPedido'): void {
+    this.router.navigate(['/userpage'], { queryParams: { tab: tab } });
+  }
 }

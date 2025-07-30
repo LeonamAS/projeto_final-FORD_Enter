@@ -4,8 +4,9 @@ import { BehaviorSubject, Observable } from 'rxjs';
 
 interface User {
   name: string;
-  username: string; // Usado como email para login e ID único
+  username: string;
   password: string;
+  role: 'admin' | 'user'; 
 }
 
 @Injectable({
@@ -16,14 +17,17 @@ export class AuthService {
 
   private loggedIn = new BehaviorSubject<boolean>(this.getLoggedInFromLocalStorage());
   private loggedUserName = new BehaviorSubject<string | null>(this.getUserNameFromLocalStorage());
-  private loggedUserUsername = new BehaviorSubject<string | null>(this.getLoggedUserUsernameFromLocalStorage()); // Novo para o username
+  private loggedUserUsername = new BehaviorSubject<string | null>(this.getLoggedUserUsernameFromLocalStorage());
+  private loggedUserRole = new BehaviorSubject<string | null>(this.getLoggedUserRoleFromLocalStorage());
 
   isLoggedIn$: Observable<boolean> = this.loggedIn.asObservable();
   loggedUserName$: Observable<string | null> = this.loggedUserName.asObservable();
-  loggedUserUsername$: Observable<string | null> = this.loggedUserUsername.asObservable(); // Expor para o componente
+  loggedUserUsername$: Observable<string | null> = this.loggedUserUsername.asObservable();
+  userRole$: Observable<string | null> = this.loggedUserRole.asObservable(); 
 
   constructor(private router: Router) {
     this.users = this.loadUsersFromLocalStorage();
+
     this.loggedIn.subscribe(value => {
       localStorage.setItem('loggedIn', JSON.stringify(value));
     });
@@ -36,9 +40,16 @@ export class AuthService {
     });
     this.loggedUserUsername.subscribe(value => {
       if (value) {
-        localStorage.setItem('loggedUserUsername', value); // Salvar o username (email)
+        localStorage.setItem('loggedUserUsername', value);
       } else {
         localStorage.removeItem('loggedUserUsername');
+      }
+    });
+    this.loggedUserRole.subscribe(value => {
+      if (value) {
+        localStorage.setItem('loggedUserRole', value);
+      } else {
+        localStorage.removeItem('loggedUserRole');
       }
     });
   }
@@ -56,6 +67,10 @@ export class AuthService {
     return localStorage.getItem('loggedUserUsername');
   }
 
+  private getLoggedUserRoleFromLocalStorage(): string | null {
+    return localStorage.getItem('loggedUserRole');
+  }
+
   private loadUsersFromLocalStorage(): User[] {
     const usersJson = localStorage.getItem('registeredUsers');
     let storedUsers: User[] = [];
@@ -67,16 +82,28 @@ export class AuthService {
       }
     }
 
-    // Adiciona o usuário admin apenas se ele não existir
     const adminUserExists = storedUsers.some(user => user.username === 'admin@email.com');
     if (!adminUserExists) {
-      return [{ name: 'Administrador', username: 'admin@email.com', password: '123456' }, ...storedUsers];
+      storedUsers.unshift({ name: 'Administrador', username: 'admin@email.com', password: '123456', role: 'admin' });
+      this.saveUsersToLocalStorage(storedUsers);
+    } else {
+        storedUsers = storedUsers.map(user => {
+            if (user.username === 'admin@email.com' && (!user.role || user.role !== 'admin')) {
+                return { ...user, role: 'admin' };
+            }
+            if (!user.role || (user.role !== 'admin' && user.role !== 'user')) {
+                return { ...user, role: 'user' };
+            }
+            return user;
+        });
+        this.saveUsersToLocalStorage(storedUsers); 
     }
+
     return storedUsers;
   }
 
-  private saveUsersToLocalStorage(): void {
-    localStorage.setItem('registeredUsers', JSON.stringify(this.users));
+  private saveUsersToLocalStorage(usersToSave: User[] = this.users): void {
+    localStorage.setItem('registeredUsers', JSON.stringify(usersToSave));
   }
 
   login(username: string, password: string): boolean {
@@ -85,8 +112,9 @@ export class AuthService {
     if (userFound) {
       this.loggedIn.next(true);
       this.loggedUserName.next(userFound.name);
-      this.loggedUserUsername.next(userFound.username); // Definir o username logado
-      console.log(`Usuário "${userFound.name}" logado com sucesso.`);
+      this.loggedUserUsername.next(userFound.username);
+      this.loggedUserRole.next(userFound.role);
+      console.log(`Usuário "${userFound.name}" (${userFound.role}) logado com sucesso.`);
       return true;
     }
     return false;
@@ -96,23 +124,28 @@ export class AuthService {
     const userExists = this.users.some(user => user.username === username);
 
     if (userExists) {
-      console.warn('Registration failed: Username already exists.');
+      console.warn('Registro falhou: Usuário já existe.');
       return false;
     }
 
-    this.users.push({ name, username, password });
-    this.saveUsersToLocalStorage();
-    console.log('User registered:', name, username);
+    const newUser: User = { name, username, password, role: 'user' }; 
+    this.users.push(newUser);
+    this.saveUsersToLocalStorage(); 
+    console.log('Usuário registrado:', name, username);
     return true;
   }
 
   logout(): void {
     this.loggedIn.next(false);
     this.loggedUserName.next(null);
-    this.loggedUserUsername.next(null); // Limpar o username ao deslogar
+    this.loggedUserUsername.next(null);
+    this.loggedUserRole.next(null); 
+
     localStorage.removeItem('loggedIn');
     localStorage.removeItem('loggedUserName');
     localStorage.removeItem('loggedUserUsername');
+    localStorage.removeItem('loggedUserRole');
+
     this.router.navigate(['/home']);
   }
 
