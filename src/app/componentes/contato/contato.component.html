@@ -1,39 +1,52 @@
 <main>
     <app-cabecalho></app-cabecalho>
     <section class="contato">
-        <div class="card p-4 shadow-sm texto" *ngIf="!formSubmitted">
+        @if(!formSubmitted) {
+        <div class="card p-4 shadow-sm texto">
             <h3 class="card-title text-center mb-4">Está com alguma dúvida?</h3>
             <p class="text-center mb-1">Entre em contato pelo formulário abaixo.</p>
-            <p class="text-center mb-4 text-danger">(Para comissões acesse a 
-                <a (click)="onLogin()" class="text-decoration-none text-danger fw-bold">página de login</a>.)</p>
+            <p class="text-center mb-4 text-danger">(Para comissões acesse a
+                <a (click)="onLogin()" class="text-decoration-none text-danger fw-bold">página de login</a>.)
+            </p>
             <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="row g-3">
                 <div class="col-12">
                     <label for="name" class="form-label">Nome</label>
                     <input type="text" id="name" formControlName="name" class="form-control">
-                    <div *ngIf="contactForm.get('name')?.invalid && contactForm.get('name')?.touched"
-                        class="text-danger">
+                    @if(contactForm.get('name')?.invalid && contactForm.get('name')?.touched) {
+                    <div class="text-danger">
                         Nome é obrigatório.
                     </div>
+                    }
                 </div>
                 <div class="col-12">
                     <label for="email" class="form-label">Email</label>
                     <input type="email" id="email" formControlName="email" class="form-control">
-                    <div *ngIf="contactForm.get('email')?.invalid && contactForm.get('email')?.touched"
-                        class="text-danger">
-                        <span *ngIf="contactForm.get('email')?.errors?.['required']">Email é obrigatório.</span>
-                        <span *ngIf="contactForm.get('email')?.errors?.['email']">Email inválido.</span>
+                    @if(contactForm.get('email')?.invalid && contactForm.get('email')?.touched) {
+                    <div class="text-danger">
+                        @if(contactForm.get('email')?.errors?.['required']) {
+                        <span>Email é obrigatório.</span>
+                        }
+                        @if(contactForm.get('email')?.errors?.['email']) {
+                        <span>Email inválido.</span>
+                        }
                     </div>
+                    }
                 </div>
                 <div class="col-12">
                     <label for="phone" class="form-label">Telefone (Opcional)</label>
                     <input type="tel" id="phone" formControlName="phone" class="form-control">
-                    <div *ngIf="contactForm.get('phone')?.invalid && contactForm.get('phone')?.touched"
-                        class="text-danger">
-                        <span *ngIf="contactForm.get('phone')?.errors?.['minlength']">O telefone deve ter no mínimo {{
+                    @if(contactForm.get('phone')?.invalid && contactForm.get('phone')?.touched) {
+                    <div class="text-danger">
+                        @if(contactForm.get('phone')?.errors?.['minlength']) {
+                        <span>O telefone deve ter no mínimo {{
                             contactForm.get('phone')?.errors?.['minlength']?.requiredLength }} dígitos.</span>
-                        <span *ngIf="contactForm.get('phone')?.errors?.['maxlength']">O telefone deve ter no máximo {{
+                        }
+                        @if(contactForm.get('phone')?.errors?.['maxlength']) {
+                        <span>O telefone deve ter no máximo {{
                             contactForm.get('phone')?.errors?.['maxlength']?.requiredLength }} dígitos.</span>
+                        }
                     </div>
+                    }
                 </div>
                 <div class="col-12">
                     <label for="subject" class="form-label">Motivo do contato</label>
@@ -43,20 +56,26 @@
                         <option value="sales">Colaborações</option>
                         <option value="feedback">Sugestões</option>
                     </select>
-                    <div *ngIf="contactForm.get('subject')?.invalid && contactForm.get('subject')?.touched"
-                        class="text-danger">
+                    @if(contactForm.get('subject')?.invalid && contactForm.get('subject')?.touched) {
+                    <div class="text-danger">
                         O motivo do contato é obrigatório.
                     </div>
+                    }
                 </div>
                 <div class="col-12">
                     <label for="message" class="form-label">Sua mensagem</label>
                     <textarea id="message" formControlName="message" rows="5" class="form-control"></textarea>
-                    <div *ngIf="contactForm.get('message')?.invalid && contactForm.get('message')?.touched"
-                        class="text-danger">
-                        <span *ngIf="contactForm.get('message')?.errors?.['required']">A mensagem é obrigatória.</span>
-                        <span *ngIf="contactForm.get('message')?.errors?.['minlength']">A mensagem deve ter pelo menos
+                    @if(contactForm.get('message')?.invalid && contactForm.get('message')?.touched) {
+                    <div class="text-danger">
+                        @if(contactForm.get('message')?.errors?.['required']) {
+                        <span>A mensagem é obrigatória.</span>
+                        }
+                        @if(contactForm.get('message')?.errors?.['minlength']) {
+                        <span>A mensagem deve ter pelo menos
                             10 caracteres.</span>
+                        }
                     </div>
+                    }
                 </div>
                 <div class="col-12 form-check">
                     <input type="checkbox" id="consent" formControlName="consent" class="form-check-input">
@@ -67,10 +86,11 @@
                     e a
                     <a (click)="onPrivacidade()" class="text-primary text-decoration-none">Política de Privacidade</a>
                     deste site.
-                    <div *ngIf="contactForm.get('consent')?.invalid && contactForm.get('consent')?.touched"
-                        class="text-danger">
+                    @if(contactForm.get('consent')?.invalid && contactForm.get('consent')?.touched) {
+                    <div class="text-danger">
                         Você deve concordar com a Política de Privacidade.
                     </div>
+                    }
                 </div>
                 <div class="col-12">
                     <button type="submit" class="btn btn-primary w-100 py-3 mb-2" [disabled]="contactForm.invalid">
@@ -79,7 +99,9 @@
                 </div>
             </form>
         </div>
-        <div *ngIf="formSubmitted" class="d-flex justify-content-center align-items-center vh-100">
+        }
+        @if(formSubmitted) {
+        <div class="d-flex justify-content-center align-items-center vh-100">
             <div class="card p-4 shadow-sm texto text-center" style="max-width: 500px; width: 100%;">
                 <h4 class="text-success mb-3">Obrigado por enviar a sua mensagem!</h4>
                 <p>Nós entraremos em contato em breve.</p>
@@ -88,6 +110,7 @@
                 </button>
             </div>
         </div>
+        }
     </section>
     <app-rodape></app-rodape>
 </main>

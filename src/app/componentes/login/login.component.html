@@ -14,11 +14,16 @@
                             <input type="email" class="form-control form-control-lg" id="email" placeholder="Email"
                                 name="email" [(ngModel)]="loginData.email" required email #emailField="ngModel"
                                 [ngClass]="{'is-invalid': emailField.invalid && (emailField.dirty || emailField.touched)}">
-                            <div *ngIf="emailField.invalid && (emailField.dirty || emailField.touched)"
-                                class="invalid-feedback">
-                                <div *ngIf="emailField.errors?.['required']">Digite seu Email.</div>
-                                <div *ngIf="emailField.errors?.['email']">Insira um Email válido.</div>
+                            @if(emailField.invalid && (emailField.dirty || emailField.touched)) {
+                            <div class="invalid-feedback">
+                                @if(emailField.errors?.['required']) {
+                                <div>Digite seu Email.</div>
+                                }
+                                @if(emailField.errors?.['email']) {
+                                <div>Insira um Email válido.</div>
+                                }
                             </div>
+                            }
                         </div>
                         <div class="mb-4">
                             <label for="password" class="form-label visually-hidden">Senha</label>
@@ -31,17 +36,23 @@
                                     (click)="togglePasswordVisibility()">
                                     <mat-icon>{{ showPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
                                 </button>
-                                <div *ngIf="passwordField.invalid && (passwordField.dirty || passwordField.touched)"
-                                    class="invalid-feedback">
-                                    <div *ngIf="passwordField.errors?.['required']">Digite sua senha.</div>
-                                    <div *ngIf="passwordField.errors?.['minlength']">A senha deve ter no mínimo 6
-                                        dígitos.</div>
+                                @if(passwordField.invalid && (passwordField.dirty || passwordField.touched)) {
+                                <div class="invalid-feedback">
+                                    @if(passwordField.errors?.['required']) {
+                                    <div>Digite sua senha.</div>
+                                    }
+                                    @if(passwordField.errors?.['minlength']) {
+                                    <div>A senha deve ter no mínimo 6 dígitos.</div>
+                                    }
                                 </div>
+                                }
                             </div>
                         </div>
-                        <div *ngIf="loginError" class="mensagem-erro alert alert-danger text-center mb-3">
+                        @if(loginError) {
+                        <div class="mensagem-erro alert alert-danger text-center mb-3">
                             Usuário ou senha inválidos <mat-icon matSuffix>error</mat-icon>
                         </div>
+                        }
                         <button type="submit" class="btn btn-primary btn-lg w-100 mb-3" [disabled]="loginForm.invalid">
                             Entrar
                         </button>

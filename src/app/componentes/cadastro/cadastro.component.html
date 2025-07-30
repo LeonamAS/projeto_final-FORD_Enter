@@ -3,8 +3,8 @@
     <section class="cadastro">
         <div class="signup-container d-flex align-items-center justify-content-center min-vh-100">
             <div class="card signup-card shadow-lg p-4 p-md-5">
-                <form (ngSubmit)="onCreateAccount()" #signupForm="ngForm"
-                    *ngIf="!showRegistrationForm && !showSuccessCard">
+                @if(!showRegistrationForm && !showSuccessCard) {
+                <form (ngSubmit)="onCreateAccount()" #signupForm="ngForm">
                     <div class="text-center mb-4">
                         <img src="/img/logo.png" alt="logo" class="logo mb-2">
                         <h2 class="titulo">Crie sua conta</h2>
@@ -15,11 +15,16 @@
                             placeholder="Endereço de email" name="email" [(ngModel)]="signupData.email" required email
                             #emailField="ngModel"
                             [ngClass]="{'is-invalid': emailField.invalid && (emailField.dirty || emailField.touched)}">
-                        <div *ngIf="emailField.invalid && (emailField.dirty || emailField.touched)"
-                            class="invalid-feedback">
-                            <div *ngIf="emailField.errors?.['required']">É necessário inserir um email.</div>
-                            <div *ngIf="emailField.errors?.['email']">Insira um email válido.</div>
+                        @if(emailField.invalid && (emailField.dirty || emailField.touched)) {
+                        <div class="invalid-feedback">
+                            @if(emailField.errors?.['required']) {
+                            <div>É necessário inserir um email.</div>
+                            }
+                            @if(emailField.errors?.['email']) {
+                            <div>Insira um email válido.</div>
+                            }
                         </div>
+                        }
                     </div>
                     <div class="mb-4">
                         <div
@@ -43,17 +48,21 @@
                                 </div>
                             </div>
                         </div>
-                        <div *ngIf="signupForm.submitted && !isRobotChecked" class="invalid-feedback d-block">
+                        @if(signupForm.submitted && !isRobotChecked) {
+                        <div class="invalid-feedback d-block">
                             Por favor, confirme que não é um robô.
                         </div>
+                        }
                     </div>
                     <button type="submit" class="btn btn-primary btn-lg w-100 mb-3"
                         [disabled]="signupForm.invalid || !isRobotChecked">
                         Avançar
                     </button>
-                    <div *ngIf="errorMessage" class="alert alert-danger mt-3" role="alert">
+                    @if(errorMessage) {
+                    <div class="alert alert-danger mt-3" role="alert">
                         {{ errorMessage }}
                     </div>
+                    }
                     <p class="text-center text-muted small mt-4">
                         Esse site é protegido por reCAPTCHA Enterprise e a
                         <a href="https://policies.google.com/privacy" target="_blank"
@@ -64,8 +73,9 @@
                         da Google se aplicam.
                     </p>
                 </form>
-                <form (ngSubmit)="onRegisterUser()" #registerForm="ngForm"
-                    *ngIf="showRegistrationForm && !showSuccessCard">
+                }
+                @if(showRegistrationForm && !showSuccessCard) {
+                <form (ngSubmit)="onRegisterUser()" #registerForm="ngForm">
                     <div class="text-center mb-4">
                         <h2 class="titulo">Defina seus dados e senha</h2>
                     </div>
@@ -80,10 +90,13 @@
                         <input type="text" class="form-control form-control-lg" id="name" placeholder="Nome" name="name"
                             [(ngModel)]="signupData.name" required #nameField="ngModel"
                             [ngClass]="{'is-invalid': nameField.invalid && (nameField.dirty || nameField.touched)}">
-                        <div *ngIf="nameField.invalid && (nameField.dirty || nameField.touched)"
-                            class="invalid-feedback">
-                            <div *ngIf="nameField.errors?.['required']">É necessário inserir seu nome.</div>
+                        @if(nameField.invalid && (nameField.dirty || nameField.touched)) {
+                        <div class="invalid-feedback">
+                            @if(nameField.errors?.['required']) {
+                            <div>É necessário inserir seu nome.</div>
+                            }
                         </div>
+                        }
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label visually-hidden">Senha</label>
@@ -96,12 +109,17 @@
                                 (click)="togglePasswordVisibility()">
                                 <i class="material-icons">{{ showPassword ? 'visibility_off' : 'visibility' }}</i>
                             </button>
-                            <div *ngIf="passwordField.invalid && (passwordField.dirty || passwordField.touched)"
-                                class="invalid-feedback d-block">
-                                <div *ngIf="passwordField.errors?.['required']">É necessário inserir uma senha.</div>
-                                <div *ngIf="passwordField.errors?.['minlength']">A senha deve ter pelo menos 6
+                            @if(passwordField.invalid && (passwordField.dirty || passwordField.touched)) {
+                            <div class="invalid-feedback d-block">
+                                @if(passwordField.errors?.['required']) {
+                                <div>É necessário inserir uma senha.</div>
+                                }
+                                @if(passwordField.errors?.['minlength']) {
+                                <div>A senha deve ter pelo menos 6
                                     caracteres.</div>
+                                }
                             </div>
+                            }
                         </div>
                     </div>
                     <div class="mb-3">
@@ -115,10 +133,12 @@
                                 (click)="togglePasswordVisibility()">
                                 <i class="material-icons">{{ showPassword ? 'visibility_off' : 'visibility' }}</i>
                             </button>
-                            <div *ngIf="signupData.password !== signupData.confirmPassword && signupData.confirmPassword.length > 0"
-                                class="invalid-feedback d-block">
+                            @if(signupData.password !== signupData.confirmPassword && signupData.confirmPassword.length
+                            > 0) {
+                            <div class="invalid-feedback d-block">
                                 As senhas não coincidem.
                             </div>
+                            }
                         </div>
                     </div>
                     <div class="mb-4 form-check">
@@ -130,24 +150,31 @@
                             e a <a (click)="onPrivacidade()" target="_blank" class="text-decoration-none">Política de
                                 Privacidade</a>.
                         </label>
-                        <div *ngIf="registerForm.submitted && !consentChecked" class="invalid-feedback d-block">
+                        @if(registerForm.submitted && !consentChecked) {
+                        <div class="invalid-feedback d-block">
                             Você deve concordar com a política de privacidade para se cadastrar.
                         </div>
+                        }
                     </div>
                     <button type="submit" class="btn btn-success btn-lg w-100 mb-3"
                         [disabled]="registerForm.invalid || signupData.password !== signupData.confirmPassword || !consentChecked">
                         Cadastrar
                     </button>
-                    <div *ngIf="errorMessage" class="alert alert-danger mt-3" role="alert">
+                    @if(errorMessage) {
+                    <div class="alert alert-danger mt-3" role="alert">
                         {{ errorMessage }}
                     </div>
+                    }
                 </form>
-                <div class="card-body text-center" *ngIf="showSuccessCard">
+                }
+                @if(showSuccessCard) {
+                <div class="card-body text-center">
                     <h2 class="card-title text-success mb-3">Cadastro Concluído! 🎉</h2>
                     <p class="card-text mb-4">Sua conta foi criada com sucesso. Agora você pode acessar o seu dashboard.
                     </p>
                     <button class="btn btn-primary btn-lg" (click)="goToDashboard()">Ir para o Dashboard</button>
                 </div>
+                }
             </div>
         </div>
     </section>
