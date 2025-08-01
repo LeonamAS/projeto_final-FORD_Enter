@@ -1,6 +1,6 @@
-import { Pedido } from "./componentes/userpage/pedido";
-import { Servico } from "./componentes/userpage/servico";
-import { UserInfo } from "./componentes/userpage/userinfo";
+import { Pedido } from "./models/pedido.interface";
+import { Servico } from "./models/servico.interface";
+import { User } from "./models/user.interface";
 
 export const servicos: Servico[] = [
     {
@@ -34,11 +34,12 @@ export const servicos: Servico[] = [
     }
 ];
 
-export const userInfo: UserInfo = {
+export const userInfo: User = {
     name: '',
     email: '',
     phone: '',
-    address: ''
+    address: '',
+    role: 'user'
 };
 
 export const orders: Pedido[] = [

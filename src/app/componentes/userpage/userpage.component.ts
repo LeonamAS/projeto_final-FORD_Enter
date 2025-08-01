@@ -4,13 +4,13 @@ import { AuthService } from './../../auth/auth.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule, CurrencyPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { combineLatest, Subject, Observable } from 'rxjs'; 
-import { takeUntil, map } from 'rxjs/operators'; 
+import { combineLatest, Subject, Observable } from 'rxjs';
+import { takeUntil, map } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 
-import { Servico } from './servico';
-import { Pedido } from './pedido';
-import { UserInfo } from './userinfo';
+import { Servico } from '../../models/servico.interface';
+import { Pedido } from '../../models/pedido.interface';
+import { User } from '../../models/user.interface';
 import { servicos as mockServicos, orders as mockOrders, userInfo as mockUserInfo } from '../../mockAPI';
 
 @Component({
@@ -34,16 +34,17 @@ export class UserpageComponent implements OnInit, OnDestroy {
 
   private LOCAL_STORAGE_ORDERS_PREFIX = 'userOrders_';
 
-  userInfo: UserInfo = {
+  userInfo: User = {
     name: '',
     email: '',
     phone: '',
-    address: ''
+    address: '',
+    role: 'user'
   };
   editMode: boolean = false;
   private LOCAL_STORAGE_USERINFO_PREFIX = 'userInfo_';
 
-  private currentUsernameForId: string | null = null;
+  private currentUserEmailForId: string | null = null;
   private currentUserNameForDisplay: string | null = null;
 
   private destroy$ = new Subject<void>();
@@ -73,18 +74,24 @@ export class UserpageComponent implements OnInit, OnDestroy {
     combineLatest([
       this.authService.isLoggedIn$,
       this.authService.loggedUserName$,
-      this.authService.loggedUserUsername$
+      this.authService.loggedUserEmail$
     ]).pipe(takeUntil(this.destroy$))
-      .subscribe(([isLoggedIn, userNameDisplay, userUsername]) => {
-        if (isLoggedIn && userUsername) {
+      .subscribe(([isLoggedIn, userNameDisplay, userEmail]) => {
+        if (isLoggedIn && userEmail) {
           this.currentUserNameForDisplay = userNameDisplay;
-          this.currentUsernameForId = userUsername;
+          this.currentUserEmailForId = userEmail;
           this.loadUserInfo();
           this.loadOrders();
         } else {
           this.currentUserNameForDisplay = null;
-          this.currentUsernameForId = null;
-          this.userInfo = { ...mockUserInfo };
+          this.currentUserEmailForId = null;
+          this.userInfo = {
+            name: '',
+            email: '',
+            phone: '',
+            address: '',
+            role: 'user' 
+          };
           this.orders = [];
           this.message = '';
           this.messageType = '';
@@ -102,7 +109,7 @@ export class UserpageComponent implements OnInit, OnDestroy {
   }
 
   fazerPedido(servico: Servico): void {
-    if (!this.currentUsernameForId) {
+    if (!this.currentUserEmailForId) {
       this.showMessage('Você precisa estar logado para fazer um pedido.', 'warning');
       this.activeTab = 'fazerPedido';
       return;
@@ -128,7 +135,7 @@ export class UserpageComponent implements OnInit, OnDestroy {
   }
 
   toggleEditMode(): void {
-    if (!this.currentUsernameForId) {
+    if (!this.currentUserEmailForId) {
       this.showMessage('Faça login para editar suas informações.', 'warning');
       return;
     }
@@ -145,11 +152,11 @@ export class UserpageComponent implements OnInit, OnDestroy {
   }
 
   private getOrdersLocalStorageKey(): string {
-    return `${this.LOCAL_STORAGE_ORDERS_PREFIX}${this.currentUsernameForId || 'guest'}`;
+    return `${this.LOCAL_STORAGE_ORDERS_PREFIX}${this.currentUserEmailForId || 'guest'}`;
   }
 
   private saveOrders(): void {
-    if (!this.currentUsernameForId) return;
+    if (!this.currentUserEmailForId) return;
     try {
       localStorage.setItem(this.getOrdersLocalStorageKey(), JSON.stringify(this.orders));
     } catch (e) {
@@ -159,7 +166,7 @@ export class UserpageComponent implements OnInit, OnDestroy {
   }
 
   private loadOrders(): void {
-    if (!this.currentUsernameForId) {
+    if (!this.currentUserEmailForId) {
       this.orders = [];
       return;
     }
@@ -178,11 +185,11 @@ export class UserpageComponent implements OnInit, OnDestroy {
   }
 
   private getUserInfoLocalStorageKey(): string {
-    return `${this.LOCAL_STORAGE_USERINFO_PREFIX}${this.currentUsernameForId || 'default'}`;
+    return `${this.LOCAL_STORAGE_USERINFO_PREFIX}${this.currentUserEmailForId || 'default'}`;
   }
 
   private saveUserInfo(): void {
-    if (!this.currentUsernameForId) return;
+    if (!this.currentUserEmailForId) return;
     try {
       localStorage.setItem(this.getUserInfoLocalStorageKey(), JSON.stringify(this.userInfo));
     } catch (e) {
@@ -192,7 +199,7 @@ export class UserpageComponent implements OnInit, OnDestroy {
   }
 
   private loadUserInfo(): void {
-    if (!this.currentUsernameForId) {
+    if (!this.currentUserEmailForId) {
       this.userInfo = { ...mockUserInfo };
       return;
     }
@@ -200,13 +207,14 @@ export class UserpageComponent implements OnInit, OnDestroy {
       const storedUserInfo = localStorage.getItem(this.getUserInfoLocalStorageKey());
       if (storedUserInfo) {
         this.userInfo = JSON.parse(storedUserInfo);
-        this.userInfo.email = this.currentUsernameForId;
+        this.userInfo.email = this.currentUserEmailForId;
       } else {
         this.userInfo = {
           name: this.currentUserNameForDisplay || mockUserInfo.name,
-          email: this.currentUsernameForId,
+          email: this.currentUserEmailForId,
           phone: mockUserInfo.phone,
-          address: mockUserInfo.address
+          address: mockUserInfo.address,
+          role: 'user'
         };
       }
     } catch (e) {
@@ -214,9 +222,10 @@ export class UserpageComponent implements OnInit, OnDestroy {
       this.showMessage('Não foi possível carregar suas informações anteriores. As informações padrão serão usadas.', 'danger');
       this.userInfo = {
         name: this.currentUserNameForDisplay || mockUserInfo.name,
-        email: this.currentUsernameForId || '',
+        email: this.currentUserEmailForId || '',
         phone: mockUserInfo.phone,
-        address: mockUserInfo.address
+        address: mockUserInfo.address,
+        role: 'user'
       };
     }
   }

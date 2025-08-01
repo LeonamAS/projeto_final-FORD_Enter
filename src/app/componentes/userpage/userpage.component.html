@@ -21,10 +21,12 @@
                     <button class="nav-link" [class.active]="activeTab === 'minhasInformacoes'"
                         (click)="changeTab('minhasInformacoes')" type="button">Minhas Informações</button>
                 </li>
-                <li class="nav-item" *ngIf="isAdmin$ | async">
+                @if(isAdmin$ | async) {
+                <li class="nav-item">
                     <button class="nav-link" [class.active]="activeTab === 'adminPanel'"
                         (click)="changeTab('adminPanel')" type="button">Painel Admin</button>
                 </li>
+                }
             </ul>
 
             @if(activeTab === 'fazerPedido') {

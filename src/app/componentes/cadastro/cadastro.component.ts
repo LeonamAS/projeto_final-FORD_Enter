@@ -61,7 +61,7 @@ export class CadastroComponent implements OnInit {
       return;
     }
 
-    if (this.authService.checkUsernameExists(this.signupData.email)) {
+    if (this.authService.checkEmailExists(this.signupData.email)) {
       this.errorMessage = 'Este email já está cadastrado. Por favor, faça login ou use outro email.';
       return;
     }
