@@ -5,21 +5,22 @@
 .gallery-thumbnail {
   cursor: pointer;
   transition: transform 0.2s ease-in-out, filter 0.2s ease-in-out;
-  object-fit: cover; 
+  object-fit: cover;
   height: 220px;
-  width: 100%; 
+  width: 100%;
   border-radius: 8px 8px 0 0;
 }
 
-.gallery-thumbnail:hover {
-  transform: scale(1.03);
-  filter: brightness(0.9);
+.gallery-card {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08) !important;
+  transition: transform 0.2s ease-in-out; 
 }
 
-.gallery-card {
-  border-radius: 8px; 
-  overflow: hidden; 
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08) !important; 
+.gallery-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.08) !important;
 }
 
 .gallery-card .card-body {
@@ -36,9 +37,9 @@
 }
 
 .modal-image {
-  max-height: 85vh; 
+  max-height: 85vh;
   width: auto;
-  object-fit: contain; 
+  object-fit: contain;
   padding: 10px;
 }
 
@@ -49,4 +50,18 @@
 
 .modal-footer .btn {
   min-width: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gallery-card .btn.btn-danger {
+  z-index: 10;
+  pointer-events: auto;
+  opacity: 0.8;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.gallery-card .btn.btn-danger:hover {
+  opacity: 1;
 }

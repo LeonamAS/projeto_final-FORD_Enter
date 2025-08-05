@@ -5,13 +5,62 @@
       <h1 class="text-center mb-4 display-4 text-primary titulo">Meus Desenhos</h1>
       <p class="text-center lead">Uma coleção de trabalhos recentes.</p>
       <hr class="mb-5">
+
+      @if(isAdmin) {
+      <div class="card p-4 mb-5 shadow-sm">
+        <h3 class="mb-3">Adicionar Nova Imagem</h3>
+        <form #imageForm="ngForm" (ngSubmit)="onAddImage(imageForm)">
+          <div class="mb-3">
+            <label for="src" class="form-label">URL da Imagem</label>
+            <input type="text" id="src" name="src" class="form-control" [(ngModel)]="newImage.src" required>
+          </div>
+          <div class="mb-3">
+            <label for="title" class="form-label">Título</label>
+            <input type="text" id="title" name="title" class="form-control" [(ngModel)]="newImage.title" required>
+          </div>
+          <div class="mb-3">
+            <label for="alt" class="form-label">Descrição (Texto Alternativo)</label>
+            <input type="text" id="alt" name="alt" class="form-control" [(ngModel)]="newImage.alt" required>
+          </div>
+          <button type="submit" class="btn btn-primary" [disabled]="!imageForm.form.valid">Adicionar Imagem</button>
+        </form>
+      </div>
+      }
+      <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+              <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmação de Exclusão</h5>
+              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"
+                (click)="cancelRemoval()"></button>
+            </div>
+            <div class="modal-body">
+              <p>Tem certeza de que deseja remover a imagem <b>"{{ imageToRemove?.title }}"</b>?</p>
+              <small class="text-danger"><b>Esta ação não pode ser desfeita.</b></small>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                (click)="cancelRemoval()">Cancelar</button>
+              <button type="button" class="btn btn-danger" (click)="confirmRemoval()">Remover</button>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 justify-content-center">
         @for(image of images; track image.src) {
         <div class="col">
-          <div class="card h-100 shadow-sm border-0 gallery-card">
-            <img [src]="image.src" [alt]="image.alt" class="card-img-top gallery-thumbnail"
-              (click)="openImageModal(image, $index)" role="button" tabindex="0"
-              [attr.aria-label]="'Abrir imagem grande de ' + image.title">
+          <div class="card h-100 shadow-sm border-0 gallery-card position-relative">
+            @if(isAdmin) {
+            <button class="btn btn-danger btn-sm position-absolute top-0 end-0 mt-2 me-2 z-1000"
+              (click)="onRemoveImage(image)" title="Remover imagem" aria-label="Remover imagem">
+              <mat-icon>delete</mat-icon>
+            </button>
+            }
+            <div class="image-wrapper" (click)="openImageModal(image, $index)">
+              <img [src]="image.src" [alt]="image.alt" class="card-img-top gallery-thumbnail" role="button" tabindex="0"
+                [attr.aria-label]="'Abrir imagem grande de ' + image.title">
+            </div>
             <div class="card-body text-center">
               <h5 class="card-title text-dark mb-1">{{ image.title }}</h5>
               <p class="card-text text-muted small">{{ image.alt }}</p>
@@ -39,12 +88,12 @@
             <div class="modal-footer d-flex justify-content-between align-items-center bg-dark text-white border-0">
               <button type="button" class="btn btn-outline-light me-auto" (click)="previousImage()"
                 [disabled]="images.length <= 1">
-                <i class="bi bi-chevron-left"></i> Anterior
+                <mat-icon>chevron_left</mat-icon> Anterior
               </button>
               <p class="mb-0 text-white-50 flex-grow-1 text-center small">{{ selectedImage?.alt }}</p>
               <button type="button" class="btn btn-outline-light ms-auto" (click)="nextImage()"
                 [disabled]="images.length <= 1">
-                Próxima <i class="bi bi-chevron-right"></i>
+                Próxima <mat-icon>chevron_right</mat-icon>
               </button>
             </div>
           </div>
