@@ -24,17 +24,17 @@
                 <span class="d-none d-md-inline text-dark">Olá, {{ loggedUserName$ | async }}!</span>
               </button>
               <div ngbDropdownMenu aria-labelledby="dropdownUser" class="dropdown-menu-user">
-                <a ngbDropdownItem (click)="onUserpage('fazerPedido')" class="d-flex align-items-center">
+                <a ngbDropdownItem (click)="onUserpage('servicos')" class="d-flex align-items-center">
                   <mat-icon class="me-2">grid_view</mat-icon> Dashboard
                 </a>
-                <a ngbDropdownItem (click)="onUserpage('meusPedidos')" class="d-flex align-items-center">
+                <a ngbDropdownItem (click)="onUserpage('pedidos')" class="d-flex align-items-center">
                   <mat-icon class="me-2">receipt_long</mat-icon> Meus Pedidos
                 </a>
-                <a ngbDropdownItem (click)="onUserpage('minhasInformacoes')" class="d-flex align-items-center">
+                <a ngbDropdownItem (click)="onUserpage('dados')" class="d-flex align-items-center">
                   <mat-icon class="me-2">account_circle</mat-icon> Minha Conta
                 </a>
                 @if(isAdmin$ | async) {
-                <a ngbDropdownItem (click)="onUserpage('adminPanel')" class="d-flex align-items-center">
+                <a ngbDropdownItem (click)="onUserpage('painel-admin')" class="d-flex align-items-center">
                   <mat-icon class="me-2">security</mat-icon> Painel Admin
                 </a>
                 }

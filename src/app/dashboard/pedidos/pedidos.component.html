@@ -1,0 +1,39 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="fw-bold fs-2 text-dark">Meus Pedidos</h2>
+</div>
+<div class="card border shadow-lg">
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-striped table-hover mb-0">
+                <thead>
+                    <tr>
+                        <th scope="col" class="text-secondary">Data</th>
+                        <th scope="col" class="text-secondary">Pagamento</th>
+                        <th scope="col" class="text-secondary">Valor</th>
+                        <th scope="col" class="text-secondary">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for(order of orders; track order.orderNumber) {
+                    <tr>
+                        <td>{{ order.date }}<br><small class="text-muted">{{ order.orderNumber}}</small></td>
+                        <td>{{ order.paymentMethod }}</td>
+                        <td>{{ order.value | currency:'BRL' }}</td>
+                        <td>
+                            <span class="fw-bold" [class.text-success]="order.status === 'Concluído'"
+                                [class.text-danger]="order.status === 'Cancelado'"
+                                [class.text-warning]="order.status === 'Em andamento'">
+                                {{ order.status }}
+                            </span>
+                        </td>
+                    </tr>
+                    } @empty {
+                    <tr>
+                        <td colspan="4" class="text-center text-muted py-3">Você ainda não tem nenhum pedido.</td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

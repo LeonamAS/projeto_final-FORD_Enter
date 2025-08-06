@@ -25,10 +25,7 @@ export class CabecalhoComponent implements OnInit {
   loggedUserName$!: Observable<string | null>;
   isAdmin$!: Observable<boolean>;
 
-  constructor(
-    private authService: AuthService,
-    private router: Router
-  ) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
     this.isLoggedIn$ = this.authService.isLoggedIn$;
@@ -50,7 +47,7 @@ export class CabecalhoComponent implements OnInit {
   onSobre(): void { this.router.navigate(['/sobre']); }
   onCadastro(): void { this.router.navigate(['/cadastro']); }
 
-  onUserpage(tab: 'fazerPedido' | 'meusPedidos' | 'minhasInformacoes' | 'adminPanel' = 'fazerPedido'): void {
-    this.router.navigate(['/userpage'], { queryParams: { tab: tab } });
+  onUserpage(path: 'servicos' | 'pedidos' | 'dados' | 'painel-admin' = 'servicos'): void {
+    this.router.navigate(['/userpage', path]);
   }
 }
