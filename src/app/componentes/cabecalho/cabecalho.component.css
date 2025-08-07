@@ -10,10 +10,9 @@
 .menu a {
     padding: 10px;
     font-size: large;
-    font-weight: bold;
 }
 
-a img {
+.navbar-brand img {
     width: 50px;
 }
 
@@ -35,36 +34,4 @@ a img {
     to {
         background-color: aliceblue;
     }
-}
-
-.dropdown-menu-user {
-    min-width: 280px;
-    background-color: #f8f9fa;
-    border: 1px solid #dee2e6;
-    border-radius: 0.5rem;
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-}
-
-.dropdown-user-header {
-    background-color: #e9ecef;
-}
-
-.dropdown-menu-user .dropdown-item {
-    padding: 0.75rem 1.5rem;
-    font-weight: 500;
-    color: #495057;
-}
-
-.dropdown-menu-user .dropdown-item:hover {
-    background-color: #dee2e6;
-    color: #212529;
-}
-
-.dropdown-menu-user .mat-icon {
-    vertical-align: middle;
-}
-
-
-@media only screen and (max-width: 600px) {
-
 }

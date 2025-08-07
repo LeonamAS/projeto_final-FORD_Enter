@@ -1,8 +1,8 @@
-<section class="cabecalho">
+<section class="cabecalho shadow-sm">
   <div class="container">
-    <nav class="navbar navbar-expand-md py-3 mb-4 border-bottom">
+    <nav class="navbar navbar-expand-md py-3">
       <div class="container-fluid">
-        <a (click)="onHome()" class="navbar-brand d-inline-flex">
+        <a routerLink="/home" class="navbar-brand d-inline-flex">
           <img src="/img/logo.png" alt="logo">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -10,40 +10,14 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse menu" id="navbarNav">
-          <ul class="navbar-nav justify-content-center flex-grow-1 mb-2 mb-md-0 menu">
-            <a (click)="onGaleria()" class="nav-link px-2 text-primary">Galeria</a>
-            <a (click)="onSobre()" class="nav-link px-2 text-primary">Sobre</a>
-            <a (click)="onContato()" class="nav-link px-2 text-primary">Contato</a>
+          <ul class="navbar-nav d-flex justify-content-end flex-grow-1 mb-2 mb-md-0">
+            <li class="nav-item">
+              <a routerLink="/galeria" class="nav-link px-3 text-primary">Gallery</a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="/sobre" class="nav-link px-3 text-primary">About</a>
+            </li>
           </ul>
-          <div class="d-flex ms-auto"> <ng-container *ngIf="isLoggedIn$ | async; else naoLogado">
-              <div ngbDropdown class="d-inline-block">
-                <button type="button" class="btn btn-link text-decoration-none p-0" id="dropdownUser" ngbDropdownToggle>
-                  <img src="/img/logo.png" alt="Avatar do usuário" class="rounded-circle me-2"
-                    style="width: 40px; height: 40px; object-fit: cover;">
-                  <span class="d-none d-md-inline text-dark">Olá, {{ loggedUserName$ | async }}!</span>
-                </button>
-                <div ngbDropdownMenu aria-labelledby="dropdownUser" class="dropdown-menu-user">
-                  <a ngbDropdownItem (click)="onUserpage()" class="d-flex align-items-center">
-                    <mat-icon class="me-2">grid_view</mat-icon> Dashboard
-                  </a>
-                  <a ngbDropdownItem (click)="onUserpage()" class="d-flex align-items-center">
-                    <mat-icon class="me-2">receipt_long</mat-icon> Meus Pedidos
-                  </a>
-                  <a ngbDropdownItem (click)="onUserpage()" class="d-flex align-items-center">
-                    <mat-icon class="me-2">account_circle</mat-icon> Minha Conta
-                  </a>
-                  <div class="dropdown-divider"></div>
-                  <a ngbDropdownItem (click)="onLogout()" class="d-flex align-items-center text-danger">
-                    <mat-icon class="me-2">exit_to_app</mat-icon> Sair
-                  </a>
-                </div>
-              </div>
-            </ng-container>
-            <ng-template #naoLogado>
-              <button type="button" (click)="onLogin()" class="btn btn-outline-primary me-2">Login</button>
-              <button type="button" (click)="onCadastro()" class="btn btn-primary">Cadastro</button>
-            </ng-template>
-          </div>
         </div>
       </div>
     </nav>
