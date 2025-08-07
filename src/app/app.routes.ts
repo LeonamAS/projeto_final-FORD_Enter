@@ -1,11 +1,11 @@
 import { Routes, RouterModule } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { SobreComponent } from './sobre/sobre.component';
-import { GaleriaComponent } from './galeria/galeria.component';
-import { ContatoComponent } from './contato/contato.component';
-import { LoginComponent } from './login/login.component';
-import { UserpageComponent } from './userpage/userpage.component';
-import { CadastroComponent } from './cadastro/cadastro.component';
+import { HomeComponent } from './componentes/home/home.component';
+import { SobreComponent } from './componentes/sobre/sobre.component';
+import { GaleriaComponent } from './componentes/galeria/galeria.component';
+import { ContatoComponent } from './componentes/contato/contato.component';
+import { LoginComponent } from './componentes/login/login.component';
+import { UserpageComponent } from './componentes/userpage/userpage.component';
+import { CadastroComponent } from './componentes/cadastro/cadastro.component';
 import { PrivacidadeComponent } from './LGPD/privacidade/privacidade.component';
 import { NgModule } from '@angular/core';
 import { TermosDeUsoComponent } from './LGPD/termos/termos.component';

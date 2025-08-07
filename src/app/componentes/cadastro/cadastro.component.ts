@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { CabecalhoComponent } from '../componentes/cabecalho/cabecalho.component';
-import { RodapeComponent } from '../componentes/rodape/rodape.component';
+import { CabecalhoComponent } from '../cabecalho/cabecalho.component';
+import { RodapeComponent } from '../rodape/rodape.component';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
-import { AuthService } from '../auth/auth.service';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-cadastro',
