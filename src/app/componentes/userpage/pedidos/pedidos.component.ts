@@ -1,12 +1,12 @@
 import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { CommonModule, CurrencyPipe } from '@angular/common';
-import { AuthService } from '../../auth/auth.service';
+import { AuthService } from '../../../auth/auth.service';
 import { Subject, takeUntil } from 'rxjs';
 
-import { Pedido } from '../../models/pedido.interface';
-import { orders as mockOrders } from '../../mockAPI';
+import { Pedido } from '../../../models/pedido.interface';
+import { orders as mockOrders } from '../../../mockAPI';
 
-import { MessageService } from '../../services/message.service';
+import { MessageService } from '../../../services/message.service';
 
 @Component({
   selector: 'app-pedidos',
@@ -66,8 +66,4 @@ export class PedidosComponent implements OnInit, OnDestroy {
       this.orders = [];
     }
   }
-
-  // O método saveOrders() pode ser removido, pois o FazerPedidoComponent fará a chamada para o localStorage
-  // ou pode ser mantido caso este componente também precise salvar o estado.
-  // private saveOrders(): void { /* ... */ }
 }

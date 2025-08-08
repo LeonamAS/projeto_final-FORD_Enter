@@ -1,15 +1,15 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { CommonModule, CurrencyPipe } from '@angular/common'; 
 import { Router } from '@angular/router'; 
-import { AuthService } from '../../auth/auth.service'; 
+import { AuthService } from '../../../auth/auth.service'; 
 import { FormsModule } from '@angular/forms';
 
-import { Servico } from '../../models/servico.interface';
-import { Pedido } from '../../models/pedido.interface';
-import { servicos as mockServicos } from '../../mockAPI';
+import { Servico } from '../../../models/servico.interface';
+import { Pedido } from '../../../models/pedido.interface';
+import { servicos as mockServicos } from '../../../mockAPI';
 
-import { PedidoService } from '../../services/pedido.service';
-import { MessageService } from '../../services/message.service';
+import { PedidoService } from '../../../services/pedido.service';
+import { MessageService } from '../../../services/message.service';
 
 @Component({
   selector: 'app-servicos', 
@@ -42,28 +42,26 @@ export class ServicosComponent {
         return;
       }
       
-      const now = new Date();
-      const formattedDate = now.toLocaleDateString('pt-BR');
-      const orderNumber = '#' + Date.now().toString().slice(-7) + Math.floor(Math.random() * 1000);
+      const dataAtual = new Date();
+      const dataFormatada = dataAtual.toLocaleDateString('pt-BR');
+      const numeroPedido = '#' + Date.now().toString().slice(-7) + Math.floor(Math.random() * 1000);
       
       const novoPedido: Pedido = {
-        date: formattedDate,
-        orderNumber: orderNumber,
+        date: dataFormatada,
+        orderNumber: numeroPedido,
         paymentMethod: 'Aguardando Pagamento',
         value: servico.preco,
         status: 'Em andamento'
       };
-      
       // Usa o serviço para emitir o novo pedido
       this.pedidoService.emitirPedido(novoPedido);
       // Usa o serviço para emitir a mensagem de sucesso
       this.messageService.emitirMensagem(`Serviço "${servico.titulo}" adicionado aos seus pedidos!`, 'success');
-      
       // Navega para a aba de "Meus Pedidos"
       this.router.navigate(['userpage/pedidos']);
     });
   }
-
+  
   private formatCurrency(value: number): string {
     return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
   }

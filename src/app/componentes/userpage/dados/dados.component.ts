@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { AuthService } from '../../auth/auth.service';
+import { AuthService } from '../../../auth/auth.service';
 import { combineLatest, Subject, takeUntil } from 'rxjs';
 
-import { User } from '../../models/user.interface';
-import { userInfo as mockUserInfo } from '../../mockAPI';
+import { User } from '../../../models/user.interface';
+import { userInfo as mockUserInfo } from '../../../mockAPI';
 
 @Component({
   selector: 'app-dados',

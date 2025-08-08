@@ -9,10 +9,10 @@ import { CadastroComponent } from './componentes/cadastro/cadastro.component';
 import { PrivacidadeComponent } from './LGPD/privacidade/privacidade.component';
 import { NgModule } from '@angular/core';
 import { TermosDeUsoComponent } from './LGPD/termos/termos.component';
-import { PedidosComponent } from './dashboard/pedidos/pedidos.component';
-import { DadosComponent } from './dashboard/dados/dados.component';
-import { PainelAdminComponent } from './dashboard/painel-admin/painel-admin.component';
-import { ServicosComponent } from './dashboard/servicos/servicos.component';
+import { PedidosComponent } from './componentes/userpage/pedidos/pedidos.component';
+import { DadosComponent } from './componentes/userpage/dados/dados.component';
+import { PainelAdminComponent } from './componentes/userpage/painel-admin/painel-admin.component';
+import { ServicosComponent } from './componentes/userpage/servicos/servicos.component';
 
 
 export const routes: Routes = [
