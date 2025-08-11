@@ -1,29 +1,14 @@
-:root {
-  --cor-rodape: aliceblue;
-}
-
 .rodape {
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 3px;
     color: white;
-    background-color: var(--cor-rodape);
-    font-weight: bold;
+    background-color: var(--cor-de-fundo-secundaria);
 }
 
 .rodape .nav-item a:hover {
     cursor: pointer;
     animation-name: animacao;
     animation-duration: 6s;
-}
-
-@keyframes animacao {
-    from {
-        background-color: white;
-    }
-
-    to {
-        background-color: var(--cor-rodape);
-    }
 }

@@ -1,19 +1,17 @@
 .sobre {
-    min-height: 80vh;
+    min-height: 85vh;
 }
 
 .layout {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding: 20px;
-    margin: 5% 0;
+    margin: 7% 0;
 }
 
 .layout img {
     width: 200px;
     height: 200px;
-    display: flex;
     align-self: self-start;
     margin-top: 10px;
     margin-left: 10px;
@@ -25,13 +23,19 @@
 }
 
 .follow {
-    font-weight: bold;
+    margin-top: 50px;
     font-size: large;
 }
 
 .texto a{
     padding: 10px;
-    font-weight: bold;
+    text-decoration: none;
+}
+
+.texto a:hover {
+  cursor: pointer;
+  animation-name: animacao;
+  animation-duration: 6s;
 }
 
 .imagens img {
@@ -56,7 +60,7 @@
         width: 100%;
     }
 
-    .texto h2, h5 {
+    .texto h2 {
         text-align: center;
         margin-bottom: 20px;
     }

@@ -5,6 +5,11 @@
     box-sizing: border-box;
 }
 
+:root {
+    --cor-de-fundo-secundaria: aliceblue;
+    --cor-principal: aliceblue;
+}
+
 html,
 body {
     height: 100%;
@@ -21,5 +26,19 @@ main {
     flex-direction: column;
     overflow: scroll;
     flex-grow: 1;
-    background-color: aliceblue;
+    background-color: var(--cor-principal);
+}
+
+a, button {
+  transition: all 0.3s ease-in-out;
+}
+
+@keyframes animacao {
+    from {
+        background-color: white;
+    }
+
+    to {
+        background-color: var(--cor-de-fundo-secundaria);
+    }
 }
