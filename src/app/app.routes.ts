@@ -11,7 +11,7 @@ import { NgModule } from '@angular/core';
 import { TermosDeUsoComponent } from './LGPD/termos/termos.component';
 import { PedidosComponent } from './componentes/userpage/pedidos/pedidos.component';
 import { DadosComponent } from './componentes/userpage/dados/dados.component';
-import { PainelAdminComponent } from './componentes/userpage/painel-admin/painel-admin.component';
+import { PainelAdminComponent } from './componentes/painel-admin/painel-admin.component';
 import { ServicosComponent } from './componentes/userpage/servicos/servicos.component';
 
 

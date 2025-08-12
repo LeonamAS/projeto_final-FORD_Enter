@@ -35,10 +35,9 @@ export class ContatoComponent implements OnInit {
 
   onSubmit(): void {
     if (this.contactForm.valid) {
-      console.log('Formulário enviado!', this.contactForm.value);
+      const mensagemUsuario = this.contactForm.value;
+      console.log('Formulário enviado!', mensagemUsuario);
       this.formSubmitted = true;
-      // this.contactForm.reset();
-      // this.contactForm.get('consent')?.setValue(false);
     }
     else {
       console.log('Formulário Inválido');
