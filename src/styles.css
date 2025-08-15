@@ -7,7 +7,7 @@
 
 :root {
     --cor-de-fundo-secundaria: aliceblue;
-    --cor-principal: aliceblue;
+    --cor-de-fundo-principal: aliceblue;
 }
 
 html,
@@ -26,7 +26,7 @@ main {
     flex-direction: column;
     overflow: scroll;
     flex-grow: 1;
-    background-color: var(--cor-principal);
+    background-color: var(--cor-de-fundo-principal);
 }
 
 a, button {
