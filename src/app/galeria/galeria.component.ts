@@ -3,6 +3,7 @@ import { CabecalhoComponent } from '../cabecalho/cabecalho.component';
 import { RodapeComponent } from '../rodape/rodape.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
 
 import { images } from './mockAPI';
 import { Imagens } from './imagens.interface';
@@ -15,7 +16,8 @@ declare var bootstrap: any;
     CabecalhoComponent,
     RodapeComponent,
     CommonModule,
-    FormsModule
+    FormsModule,
+    MatIconModule
   ],
   templateUrl: './galeria.component.html',
   styleUrl: './galeria.component.css'

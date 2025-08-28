@@ -5,9 +5,9 @@
 .gallery-thumbnail {
   cursor: pointer;
   transition: transform 0.2s ease-in-out, filter 0.2s ease-in-out;
-  object-fit: cover; 
+  object-fit: cover;
   height: 220px;
-  width: 100%; 
+  width: 100%;
   border-radius: 8px 8px 0 0;
 }
 
@@ -17,9 +17,9 @@
 }
 
 .gallery-card {
-  border-radius: 8px; 
-  overflow: hidden; 
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08) !important; 
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08) !important;
 }
 
 .gallery-card .card-body {
@@ -35,18 +35,55 @@
   font-size: 0.85rem;
 }
 
-.modal-image {
-  max-height: 85vh; 
-  width: auto;
-  object-fit: contain; 
-  padding: 10px;
-}
+/* ESTILOS PARA O MODAL */
 
 .modal-content {
-  border-radius: 10px;
-  overflow: hidden;
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
 }
 
-.modal-footer .btn {
-  min-width: 120px;
+.modal-dialog {
+  position: relative;
+}
+
+.custom-modal-footer {
+  color: white;
+  padding: 10px 0;
+  font-size: 1rem;
+}
+
+.modal-image {
+  max-width: 90vw;
+  max-height: 80vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 0;
+  padding: 0;
+}
+
+.image-info {
+  color: white;
+  padding: 10px 0;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.modal-backdrop {
+  background-color: rgb(0, 0, 0);
+}
+
+.modal-header .btn-close {
+  display: none;
+}
+
+.modal-body {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent !important;
 }
