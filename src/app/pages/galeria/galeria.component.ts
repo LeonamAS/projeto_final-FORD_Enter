@@ -1,6 +1,4 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { CabecalhoComponent } from '../cabecalho/cabecalho.component';
-import { RodapeComponent } from '../rodape/rodape.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
 import { AuthService } from '../../auth/auth.service';
@@ -10,6 +8,8 @@ import { MatIconModule } from '@angular/material/icon';
 
 import { Galeria } from '../../models/galeria.interface';
 import { images as mockImages } from '../../mockAPI';
+import { RodapeComponent } from '../../componentes/rodape/rodape.component';
+import { CabecalhoComponent } from '../../componentes/cabecalho/cabecalho.component';
 
 
 declare var bootstrap: any;

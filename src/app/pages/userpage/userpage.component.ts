@@ -1,17 +1,18 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CabecalhoComponent } from '../cabecalho/cabecalho.component';
-import { RodapeComponent } from '../rodape/rodape.component';
 import { AuthService } from '../../auth/auth.service';
 import { Observable, Subject, takeUntil, combineLatest, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { RouterOutlet, RouterLink, RouterLinkActive, Router } from '@angular/router';
+import { CabecalhoComponent } from '../../componentes/cabecalho/cabecalho.component';
+import { RodapeComponent } from '../../componentes/rodape/rodape.component';
 
 import { Pedido } from '../../models/pedido.interface';
 import { orders as mockOrders } from '../../mockAPI';
 
 import { PedidoService } from '../../services/pedido.service';
 import { MessageService } from '../../services/message.service';
+
 
 @Component({
   selector: 'app-userpage',

@@ -1,37 +1,67 @@
 import { Routes, RouterModule } from '@angular/router';
-import { HomeComponent } from './componentes/home/home.component';
-import { SobreComponent } from './componentes/sobre/sobre.component';
-import { GaleriaComponent } from './componentes/galeria/galeria.component';
-import { ContatoComponent } from './componentes/contato/contato.component';
-import { LoginComponent } from './componentes/login/login.component';
-import { UserpageComponent } from './componentes/userpage/userpage.component';
-import { CadastroComponent } from './componentes/cadastro/cadastro.component';
-import { PrivacidadeComponent } from './LGPD/privacidade/privacidade.component';
 import { NgModule } from '@angular/core';
-import { TermosDeUsoComponent } from './LGPD/termos/termos.component';
-import { PedidosComponent } from './componentes/userpage/pedidos/pedidos.component';
-import { DadosComponent } from './componentes/userpage/dados/dados.component';
 import { PainelAdminComponent } from './componentes/painel-admin/painel-admin.component';
-import { ServicosComponent } from './componentes/userpage/servicos/servicos.component';
+import { HomeComponent } from './pages/home/home.component';
+import { UserpageComponent } from './pages/userpage/userpage.component';
+import { ServicosComponent } from './pages/userpage/servicos/servicos.component';
+import { PedidosComponent } from './pages/userpage/pedidos/pedidos.component';
+import { DadosComponent } from './pages/userpage/dados/dados.component';
 
 
 export const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
-    { path: 'home', component: HomeComponent },
-    { path: 'sobre', component: SobreComponent },
-    { path: 'galeria', component: GaleriaComponent },
-    { path: 'contato', component: ContatoComponent },
-    { path: 'login', component: LoginComponent },
-    { path: 'cadastro', component: CadastroComponent },
-    { path: 'privacidade', component: PrivacidadeComponent },
-    { path: 'termos', component: TermosDeUsoComponent },
+    {
+        path: 'home', component: HomeComponent
+    },
+    {
+        path: 'sobre',
+        loadComponent: () => import('./pages/sobre/sobre.component').then(
+            (c) => (c.SobreComponent)
+        )
+    },
+    {
+        path: 'galeria',
+        loadComponent: () => import('./pages/galeria/galeria.component').then(
+            (c) => (c.GaleriaComponent)
+        )
+    },
+    {
+        path: 'contato',
+        loadComponent: () => import('./pages/contato/contato.component').then(
+            (c) => (c.ContatoComponent)
+        )
+    },
+    {
+        path: 'login',
+        loadComponent: () => import('./pages/login/login.component').then(
+            (c) => (c.LoginComponent)
+        )
+    },
+    {
+        path: 'cadastro',
+        loadComponent: () => import('./pages/cadastro/cadastro.component').then(
+            (c) => (c.CadastroComponent)
+        )
+    },
+    {
+        path: 'privacidade',
+        loadComponent: () => import('./LGPD/privacidade/privacidade.component').then(
+            (c) => (c.PrivacidadeComponent)
+        )
+    },
+    {
+        path: 'termos',
+        loadComponent: () => import('./LGPD/termos/termos.component').then(
+            (c) => (c.TermosDeUsoComponent)
+        )
+    },
     {
         path: 'userpage', component: UserpageComponent, children: [
             { path: 'servicos', component: ServicosComponent },
             { path: 'pedidos', component: PedidosComponent },
             { path: 'dados', component: DadosComponent },
             { path: 'painel-admin', component: PainelAdminComponent },
-            { path: '', redirectTo: 'servicos', pathMatch: 'full' } 
+            { path: '', redirectTo: 'servicos', pathMatch: 'full' }
         ]
     },
 ];
